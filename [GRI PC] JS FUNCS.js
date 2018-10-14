@@ -1,6 +1,6 @@
 /* JAVASCRIPT FUNCTIONS LIBRARY FOR PREFERENCE CENTER */
 
-/* VERSION 0.0.17 | DATE 14-10-2018 */
+/* VERSION 0.0.18 | DATE 14-10-2018 */
 
 /*---- ------------------------------ DOUBLE CSV TO MATRIX ------------------------------ ----*/
 function doubleCSVtoMatrix(csvInputId, outputDivId, delim1, delim2) {
