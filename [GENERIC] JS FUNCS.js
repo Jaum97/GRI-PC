@@ -1,16 +1,13 @@
 /* GENERIC JAVASCRIPT FUNCTIONS LIBRARY */
 
 /* VERSION 0.0.18 | DATE 14-10-2018 */
-/*
-
-*/
 
 const csvToArray = (csvEntry, csvDelimiter = ",") => csvEntry.split(csvDelimiter);
 
-const arrayNoDups = (mySet) => Array.from(new Set(mySet));
+const arrayNoDups = (mySet = []) => Array.from(new Set(mySet));
 
 function removeFromArray(myArray, element) {
-    for (let i = myArray.length; i--;) (myArray[i] === element) ? myArray.splice(i, 1) : false
+    for (let i = myArray.length; i--;)(myArray[i] === element) ? myArray.splice(i, 1) : false
 }
 
 function arrayIntersec(array1, array2) {
@@ -25,6 +22,8 @@ function arrayIntersec(array1, array2) {
 }
 
 function clearInnerHTML(targetBlockId) {
- const element = document.getElementById(targetBlockId);
- while (element.firstChild) element.removeChild(element.firstChild);
+    const element = document.getElementById(targetBlockId);
+    if (element) {
+        while (element.firstChild) element.removeChild(element.firstChild);
+    }
 }

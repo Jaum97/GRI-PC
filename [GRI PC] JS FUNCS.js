@@ -3,18 +3,10 @@
 /* VERSION 0.0.18 | DATE 14-10-2018 */
 
 /*---- ------------------------------ DOUBLE CSV TO MATRIX ------------------------------ ----*/
-function doubleCSVtoMatrix(csvInputId, outputDivId, delim1, delim2) {
-
+function doubleCSVtoMatrix(csvInputId, delim1, delim2) {
     let array1 = csvToArray(document.getElementById(csvInputId).innerHTML, delim1);
-    let array2 = [],
-        matrix = [];
-    let len2 = 0;
-    for (let i = array1.length; i--;) {
-        matrix[i] = [];
-        array2[i] = csvToArray(array1[i], delim2);
-        len2 = array2[i].length;
-        for (let j = len2; j--;) matrix[i][j] = array2[i][j]
-    }
+    let matrix = [];
+    for (let i = array1.length; i--;) matrix[i] = csvToArray(array1[i], delim2);
     return matrix;
 }
 /*---- ------------------------------  ----------------------  ------------------------------ ----*/
@@ -22,13 +14,9 @@ function doubleCSVtoMatrix(csvInputId, outputDivId, delim1, delim2) {
 
 
 /*---- ------------------------------  RETURN FIELD IF MATCH ------------------------------  ----*/
-function returnFieldifMatch(matrix, wantedField, conditionField, conditionValue, conditionField2, conditionValue2, conditionField3, conditionValue3, conditionField4, conditionValue4, conditionField5, conditionValue5) {
+function returnFieldifMatch(matrix, wantedField, conditionField, conditionValue) {
     let matchedArray = [];
-    let matrixLen = matrix.length;
-    let i = matrixLen;
-    for (i; i--;) {
-        ((matrix[i][conditionField] === conditionValue) && (matrix[i][conditionField2] === conditionValue2) && (matrix[i][conditionField3] === conditionValue3) && (matrix[i][conditionField4] === conditionValue4) && (matrix[i][conditionField5] === conditionValue5)) ? matchedArray.push(matrix[i][wantedField]): false
-    }
+    for (let i = matrix.length; i--;)(matrix[i][conditionField] === conditionValue) ? matchedArray.push(matrix[i][wantedField]) : false
     return matchedArray;
 }
 /*----  ------------------------------ ----------------------  ------------------------------ ----*/
@@ -273,7 +261,7 @@ function createBlockys(filterType) {
     if (((filterType != "Country") && (filterType != "Segment")) && ((filterRegionOn != "") || (filterSectorOn != ""))) {
         createCountriesFilter(neo, common1, 6);
     }
-    if (filterType != "Segment"){
+    if (filterType != "Segment") {
         createSegmentFilter(neo, common2, 8);
     }
     if (filterType == "Region") {
@@ -367,6 +355,7 @@ function createRegionFilter(matrix, array, fieldToMatch) {
 
 /*---- ------------------------------ ---------------------- ------------------------------ ----*/
 function subscribedClass(productId, productClassOn, checkboxId) {
+
     let target = document.getElementById(checkboxId).classList;
     (target.contains(productClassOn)) ? (target.remove(productClassOn), removeFromArray(subscribedProducts, productId)) : (target.add(productClassOn), subscribedProducts.push(productId));
 }
@@ -415,7 +404,7 @@ function sortBy(param) {
     matrixLen = neo.length;
     arrayLen = subscribedProducts.length;
     (subscribedProducts[0] == "") ? subscribedProducts.shift(): false
-    for (let i = 14; i--;) clearInnerHTML("debugPrints0" + i)
+    clearInnerHTML("debugPrints0");
     notsubs = trinity.filter(x => !subscribedProducts.includes(x));
     if (param === "subscribed") {
         createProductBlocky(neo, subscribedProducts, '', '', 'debugPrints0');
@@ -430,43 +419,8 @@ function sortBy(param) {
 /*---- ------------------------------ ---------------------- ------------------------------ ----*/
 
 
-const changeParsers = (myArray = [],delim = ";") => myArray.toString().replace(/,/g, ";");
+const changeParsers = (myArray = [], delim = ";") => myArray.toString().replace(/,/g, ";");
 /*---- ------------------------------ ---------------------- ------------------------------ ----*/
-
-
-
-/*---- ------------------------------  CREATE FILTER BUTTON ------------------------------ ----*/
-function printGlobals() {
-    //console.log("---PRINT---");
-    //console.log('filterSectorOn');
-    //console.log(filterSectorOn);
-    //console.log('filterRegionOn');
-    //console.log(filterRegionOn);
-    //console.log('filterCountryOn');
-    //console.log(filterCountryOn);
-    //console.log('filterSegmentOn');
-    //console.log(filterSegmentOn);
-    //console.log('productsSectorOn');
-    //console.log(productsSectorOn);
-    //console.log('productsRegionOn');
-    //console.log(productsRegionOn);
-    //console.log('productsCountryOn');
-    //console.log(productsCountryOn);
-    //console.log('productsSegmentOn');
-    //console.log(productsSegmentOn);
-    //console.log('productsCommonSecReg');
-    //console.log(productsCommonSecReg);
-    //console.log('productsCommonSecRegCon');
-    //console.log(productsCommonSecRegCon);
-    //console.log('productsCommonSecRegConSeg');
-    //console.log(productsCommonSecRegConSeg);
-    //console.log(productInterestLatinAmerica);
-    //console.log(productInterestEurope);
-    //console.log(productInterestAsia);
-}
-/*---- ------------------------------ ---------------------- ------------------------------ ----*/
-
-
 
 /*---- ------------------------------ ---------------------- ------------------------------ ----*/
 function returnStuffy(type, targetPosition, filterType, filterOptionClassOn, filterOptionClassOff, filterArray) {
@@ -568,26 +522,21 @@ function validateFilters(filterType, classesValueArray) {
         createFilterOption(neo, 'testCountryFilterLocation', arrayBlank, 'Country', 'buttonCountryOff', 'buttonCountryOn', 'no');
         createFilterOption(neo, 'testSegmentFilterLocation', arrayBlank, 'Segment', 'buttonSegmentOff', 'buttonSegmentOn', 'no');
     }
-    let count = 0;
-    (document.getElementById("debugPrints0").innerHTML == "") ? false : count++
-    console.log('count');
-    console.log(count);
 }
 /*---- ------------------------------ ---------------------- ------------------------------ ----*/
 
 function refreshArrays() {
-    console.log("refresh");
-    while (productsSectorOn.length) productsSectorOn.pop()
-    while (productsRegionOn.length) productsRegionOn.pop()
-    while (productsCountryOn.length) productsCountryOn.pop()
-    while (productsSegmentOn.length) productsSegmentOn.pop()
+    productsSectorOn = [];
+    productsRegionOn = [];
+    productsCountryOn = [];
+    productsSegmentOn = [];
 }
 
 function searchBox(input) {
-    console.log(input);
+    const targetPosition = document.getElementById("debugPrints0");
     let toMatch = input.toUpperCase();
     let matchedArray = [];
     for (let i = trinity.length; i--;)(trinity[i].toUpperCase().indexOf(toMatch) > -1) ? matchedArray.push(trinity[i]) : false
-    clearInnerHTML("debugPrints0")
-    (matchedArray.length) ? createProductBlocky(neo, matchedArray, '', '', 'debugPrints0'): document.getElementById("debugPrints0").innerHTML = "SORRY NO PRODUCTS FOUND";
+    clearInnerHTML("debugPrints0");
+    (matchedArray.length) ? createProductBlocky(neo, matchedArray, '', '', 'debugPrints0'): targetPosition.innerHTML = "SORRY NO PRODUCTS FOUND";
 }

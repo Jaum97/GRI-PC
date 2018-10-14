@@ -1028,7 +1028,7 @@
             productInterestEurope = [],
             productInterestAsia = [];
         let subscribedProducts = csvToArray(document.getElementById('testInterests').innerHTML, ';');
-        let neo = doubleCSVtoMatrix('allDEFields', 'debugPrints0', ';', '$');
+        let neo = doubleCSVtoMatrix('allDEFields', ';', '$');
         let trinity = returnFieldifMatch(neo, '2');
         console.log('%c Important Variables', 'color: blue;font-weight:bold;');
         console.log({
