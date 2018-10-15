@@ -98,10 +98,15 @@ function createFilterOption(matrix, targetPosition, arrayFieldToLook, filterType
         FilterOptionDefault.setAttribute("selected", "selected");
         FilterOptionDefault.setAttribute("disabled", "true");
         FilterOptionDefault.setAttribute("hidden", "true");
+        FilterOptionDefault.setAttribute("onclick", myFunction());
         document.getElementById(targetPosition).appendChild(FilterOptionDefault);
+        //document.getElementById(targetPosition).setAttribute("onchange",filterSelect(targetPosition));
         for (i; i--;) returnStuffy("OPTION", targetPosition, filterType, filterOptionClassOn, filterOptionClassOff, filterArray[i]);
     }
 
+}
+function myFunction(){
+  console.log('henlo');
 }
 /*---- ------------------------------ ---------------------- ------------------------------ ----*/
 
@@ -385,6 +390,7 @@ function sortBy(param) {
 }
 
 function returnStuffy(type, targetPosition, filterType, filterOptionClassOn, filterOptionClassOff, filterArray) {
+    console.log(document.getElementById(targetPosition));
     thisOptionId = "OPTION" + filterType + filterArray;
     thisButtonId = type + filterType + filterArray;
     FilterOption = document.createElement(type);
@@ -402,7 +408,9 @@ function returnStuffy(type, targetPosition, filterType, filterOptionClassOn, fil
 
     /*(type == "BUTTON") ? (filterClass == filterOptionClassOn) ? (clearInnerHTML(targetPosition), document.getElementById(targetPosition).appendChild(FilterOption)) : false:*/
 
+
     document.getElementById(targetPosition).appendChild(FilterOption);
+    //document.getElementById(targetPosition).setAttribute("onchange",(this.options)?this.options[this.selectedIndex].onclick():false);
 }
 
 function createActiveButtons(filterType, activeArray) {
@@ -507,4 +515,9 @@ function searchBox(input) {
     for (let i = initialize.trinity.length; i--;)(initialize.trinity[i].toUpperCase().indexOf(toMatch) > -1) ? matchedArray.push(initialize.trinity[i]) : false
     clearInnerHTML("debugPrints0");
     (matchedArray.length) ? createProductBlocky(initialize.neo, matchedArray, '', '', 'debugPrints0'): targetPosition.innerHTML = "SORRY NO PRODUCTS FOUND";
+}
+
+function filterSelect(target){
+  console.log(document.getElementById(target));
+  document.getElementById(target).setAttribute("onchange",this.options[this.selectedIndex].onclick());
 }
