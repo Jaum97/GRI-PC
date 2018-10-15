@@ -1013,36 +1013,35 @@
         </i>
     </div>
     <script id="functionCalls">
-        let filterSectorOn = [],
-            filterRegionOn = [],
-            filterCountryOn = [],
-            filterSegmentOn = [],
-            productsSectorOn = [],
-            productsRegionOn = [],
-            productsCountryOn = [],
-            productsSegmentOn = [],
-            productsCommonSecReg = [],
-            productsCommonSecRegCon = [],
-            productsCommonSecRegConSeg = [],
-            productInterestLatinAmerica = [],
-            productInterestEurope = [],
-            productInterestAsia = [];
-        let subscribedProducts = csvToArray(document.getElementById('testInterests').innerHTML, ';');
-        let neo = doubleCSVtoMatrix('allDEFields', ';', '$');
-        let trinity = returnFieldifMatch(neo, '2');
-        console.log('%c Important Variables', 'color: blue;font-weight:bold;');
-        console.log({
-            neo
-        });
-        console.log({
-            trinity
-        });
-        console.log({
-            subscribedProducts
-        });
-        createProductBlocky(neo, trinity, '', '', 'debugPrints0');
-        createFilterOption(neo, 'testRegionFilterLocation', arrayNoDups(returnFieldifMatch(neo, '4', '12', 'active')), 'Region', 'buttonRegionOff', 'buttonRegionOn', 'no');
-        createFilterOption(neo, 'testSectorFilterLocation', arrayNoDups(returnFieldifMatch(neo, '3', '12', 'active')), 'Sector', 'buttonSectorOff', 'buttonSectorOn', 'no');
+
+    var initialize = {
+          filterSectorOn: [],
+          filterRegionOn: [],
+          filterCountryOn: [],
+          filterSegmentOn: [],
+          productsSectorOn: [],
+          productsRegionOn: [],
+          productsCountryOn: [],
+          productsSegmentOn: [],
+          productsCommonSecReg: [],
+          productsCommonSecRegCon: [],
+          productsCommonSecRegConSeg: [],
+          productInterestLatinAmerica: [],
+          productInterestEurope: [],
+          productInterestAsia: [],
+          neo: [],
+          trinity: [],
+          subscribedProducts: []
+        };
+        initialize.neo = doubleCSVtoMatrix('allDEFields', ';', '$');
+        initialize.trinity = returnFieldifMatch(initialize.neo, '2');
+        initialize.subscribedProducts = csvToArray(document.getElementById('testInterests').innerHTML, ';');
+
+        console.log('%c Important Variables', 'color: #31e2d4;font-weight:bold;');
+        console.log({initialize});
+        createProductBlocky(initialize.neo, initialize.trinity, '', '', 'debugPrints0');
+        createFilterOption(initialize.neo, 'testRegionFilterLocation', arrayNoDups(returnFieldifMatch(initialize.neo, '4', '12', 'active')), 'Region', 'buttonRegionOff', 'buttonRegionOn', 'no');
+        createFilterOption(initialize.neo, 'testSectorFilterLocation', arrayNoDups(returnFieldifMatch(initialize.neo, '3', '12', 'active')), 'Sector', 'buttonSectorOff', 'buttonSectorOn', 'no');
     </script>
 </body>
 
