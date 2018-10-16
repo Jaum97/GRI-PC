@@ -6,6 +6,8 @@ const csvToArray = (csvEntry, csvDelimiter = ",") => csvEntry.split(csvDelimiter
 
 const arrayNoDups = (mySet = []) => Array.from(new Set(mySet));
 
+const changeParsers = (myArray = [], delim = ";") => myArray.toString().replace(/,/g, ";");
+
 function removeFromArray(myArray, element) {
     for (let i = myArray.length; i--;)(myArray[i] === element) ? myArray.splice(i, 1) : false
 }

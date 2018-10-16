@@ -9,21 +9,13 @@ function doubleCSVtoMatrix(csvInputId, delim1, delim2) {
     for (let i = array1.length; i--;) matrix[i] = csvToArray(array1[i], delim2);
     return matrix;
 }
-/*---- ------------------------------  ----------------------  ------------------------------ ----*/
 
-
-
-/*---- ------------------------------  RETURN FIELD IF MATCH ------------------------------  ----*/
 function returnFieldifMatch(matrix, wantedField, conditionField, conditionValue) {
     let matchedArray = [];
     for (let i = matrix.length; i--;)(matrix[i][conditionField] === conditionValue) ? matchedArray.push(matrix[i][wantedField]) : false
     return matchedArray;
 }
-/*----  ------------------------------ ----------------------  ------------------------------ ----*/
 
-
-
-/*---- ------------------------------ CREATE PRODUCT BLOCK ------------------------------ ----*/
 function createProductBlocky(matrix, wantedArray, fieldToCheck, fieldValue, targetLocationId) {
     let j, dynamicTD, dynamicLABEL, dynamicDIV, dynamicDIV2, dynamicINPUT, dynamicSPAN, dynamicSPAN2, dynamicIMAGE, toggleButtonFunction;
     let blockArray = [];
@@ -32,7 +24,8 @@ function createProductBlocky(matrix, wantedArray, fieldToCheck, fieldValue, targ
     let currentName;
     let checkboxClass = "";
     let classz = "subscribedOn";
-    let subsLen = subscribedProducts.length;
+    let subscribedProds = initialize.subscribedProducts;
+    let subsLen = subscribedProds.length;
     for (i; i--;) {
         currentName = String(returnFieldifMatch(matrix, '2', '2', wantedArray[i]));
         if (currentName) {
@@ -46,7 +39,7 @@ function createProductBlocky(matrix, wantedArray, fieldToCheck, fieldValue, targ
             dynamicSPAN = document.createElement("H4");
             dynamicIMAGE = document.createElement("IMG");
 
-            dynamicDIV.setAttribute("class", 'spanf');
+            dynamicDIV.setAttribute("class", 'bouncyClass');
             dynamicDIV.setAttribute("id", 'divId' + currentName);
 
             dynamicDIV2.setAttribute("style", "display:block;border-style:solid;");
@@ -57,11 +50,12 @@ function createProductBlocky(matrix, wantedArray, fieldToCheck, fieldValue, targ
             dynamicINPUT.setAttribute('id', 'checkbox' + currentName);
             dynamicINPUT.setAttribute('type', 'checkbox');
 
-            for (j = subsLen; j--;)(subscribedProducts[j] == currentName) ? (dynamicINPUT.setAttribute('checked', 'true'), (dynamicINPUT.setAttribute('class', classz))) : false
+            for (j = subsLen; j--;)(subscribedProds[j] == currentName) ? (dynamicINPUT.setAttribute('checked', 'true'), (dynamicINPUT.setAttribute('class', classz))) : false
 
             toggleButtonFunction = "subscribedClass('" + currentName + "','" + classz + "','" + dynamicINPUT.id + "')";
 
-            dynamicINPUT.setAttribute('onclick', toggleButtonFunction);
+            //dynamicINPUT.setAttribute('onclick', toggleButtonFunction);
+            dynamicINPUT.addEventListener('onclick', toggleButtonFunction);
             dynamicSPAN2.setAttribute('class', 'slider round');
             dynamicSPAN.setAttribute("id", 'testSPANId' + currentName);
             dynamicSPAN.innerHTML = currentName;
@@ -93,7 +87,7 @@ function createProductBlocky(matrix, wantedArray, fieldToCheck, fieldValue, targ
 /*---- ------------------------------  CREATE FILTER OPTION ------------------------------ ----*/
 function createFilterOption(matrix, targetPosition, arrayFieldToLook, filterType, filterOptionClassOff, filterOptionClassOn) {
     let filterArray = [];
-    let j, FilterOption, filterClass, activeFilters, thisOptionId, functionOnClickString;
+    let j, FilterOption, filterClass, activeFilters, thisOptionId;
     document.getElementById(targetPosition).innerHTML = "";
     filterArray = arrayFieldToLook;
     let i = filterArray.length;
@@ -104,10 +98,15 @@ function createFilterOption(matrix, targetPosition, arrayFieldToLook, filterType
         FilterOptionDefault.setAttribute("selected", "selected");
         FilterOptionDefault.setAttribute("disabled", "true");
         FilterOptionDefault.setAttribute("hidden", "true");
+        FilterOptionDefault.setAttribute("onclick", myFunction());
         document.getElementById(targetPosition).appendChild(FilterOptionDefault);
+        //document.getElementById(targetPosition).setAttribute("onchange",filterSelect(targetPosition));
         for (i; i--;) returnStuffy("OPTION", targetPosition, filterType, filterOptionClassOn, filterOptionClassOff, filterArray[i]);
     }
 
+}
+function myFunction(){
+  console.log('henlo');
 }
 /*---- ------------------------------ ---------------------- ------------------------------ ----*/
 
@@ -141,10 +140,10 @@ function getFilters(filterType) {
 
     document.getElementById(targetid).innerHTML = classesValueArray;
 
-    returnFieldifMatchArray(neo, 2, filterType, classesValueArray);
+    returnFieldifMatchArray(initialize.neo, 2, filterType, classesValueArray,initialize);
     console.log(classesValueArray);
     createActiveButtons(filterType, classesValueArray);
-    validateFilters(filterType, classesValueArray);
+    validateFilters(filterType, classesValueArray, initialize);
     return classesValueArray;
 }
 /*---- ------------------------------ ---------------------- ------------------------------ ----*/
@@ -152,8 +151,7 @@ function getFilters(filterType) {
 
 
 /*---- ------------------------------ RETURN FIELD IF MATCH ARRAY ------------------------------ ----*/
-function returnFieldifMatchArray(matrix, wantedField, filterType, classesValueArray) {
-
+function returnFieldifMatchArray(matrix, wantedField, filterType, classesValueArray,myObject) {
     let matchedArray1 = [];
     let conditionValues1 = csvToArray(document.getElementById('active' + filterType + 'FiltersHere').innerHTML, ',');
     let condVal1Len = conditionValues1.length;
@@ -175,7 +173,7 @@ function returnFieldifMatchArray(matrix, wantedField, filterType, classesValueAr
         }
     }
     updateProducts(filterType, matchedArray1);
-    createBlockys(filterType);
+    createBlockys(filterType,initialize);
     return matchedArray1;
 }
 /*---- ------------------------------ ---------------------- ------------------------------ ----*/
@@ -186,16 +184,16 @@ function returnFieldifMatchArray(matrix, wantedField, filterType, classesValueAr
 function convertNametoNumber(filterType, updateValue) {
     let filterNumber;
     if (filterType == "Sector") {
-        filterSectorOn = updateValue;
+        initialize.filterSectorOn = updateValue;
         filterNumber = "3";
     } else if (filterType == "Region") {
-        filterRegionOn = updateValue;
+        initialize.filterRegionOn = updateValue;
         filterNumber = "4";
     } else if (filterType == "Country") {
-        filterCountryOn = updateValue;
+        initialize.filterCountryOn = updateValue;
         filterNumber = "6";
     } else if (filterType == "Segment") {
-        filterSegmentOn = updateValue;
+        initialize.filterSegmentOn = updateValue;
         filterNumber = "8";
     } else {
         filterNumber = "13";
@@ -209,73 +207,51 @@ function convertNametoNumber(filterType, updateValue) {
 /*---- ------------------------------ ---------------------- ------------------------------ ----*/
 function updateProducts(filterType, updateValue) {
     if (filterType == "Sector") {
-        productsSectorOn = updateValue;
+        initialize.productsSectorOn = updateValue;
     } else if (filterType == "Region") {
-        productsRegionOn = updateValue;
+        initialize.productsRegionOn = updateValue;
     } else if (filterType == "Country") {
-        productsCountryOn = updateValue;
+        initialize.productsCountryOn = updateValue;
     } else if (filterType == "Segment") {
-        productsSegmentOn = updateValue;
+        initialize.productsSegmentOn = updateValue;
     }
 }
-/*---- ------------------------------ ---------------------- ------------------------------ ----*/
 
+function createBlockys(filterType,myObject) {
+    let common1 = arrayNoDups(arrayIntersec(myObject.productsSectorOn, myObject.productsRegionOn));
+    let common2 = arrayNoDups(arrayIntersec(common1, myObject.productsCountryOn));
+    let common3 = arrayNoDups(arrayIntersec(common2, myObject.productsSegmentOn));
 
-function setMatches(wanted) {
-    console.log("setMatches");
-    productsCommonSecReg = arrayNoDups(arrayIntersec(productsSectorOn, productsRegionOn));
-    productsCommonSecRegCon = arrayNoDups(arrayIntersec(productsCommonSecReg, productsCountryOn));
-    productsCommonSecRegConSeg = arrayNoDups(arrayIntersec(productsCommonSecRegCon, productsSegmentOn));
-    if (wanted === 1) {
-        return productsCommonSecReg;
-    } else if (wanted === 2) {
-        return productsCommonSecRegCon;
-    } else if (wanted === 3) {
-        return productsCommonSecRegConSeg;
-    } else {
-        return false;
-    }
-}
-/*---- ------------------------------ ---------------------- ------------------------------ ----*/
-function createBlockys(filterType) {
-    let common1 = setMatches(1);
-    let common2 = setMatches(2);
-    let common3 = setMatches(3);
-    let test;
-
+    console.log({common1,common2,common3});
     clearInnerHTML("debugPrints0");
 
-    if ((common3.length) && (filterSegmentOn != "")) {
-        createProductBlocky(neo, common3, '', '', 'debugPrints0');
-    } else if ((common2.length) && (filterCountryOn != "")) {
-        createProductBlocky(neo, common2, '', '', 'debugPrints0');
+    if ((common3.length) && (myObject.filterSegmentOn != "")) {
+        createProductBlocky(myObject.neo, common3, '', '', 'debugPrints0');
+    } else if ((common2.length) && (myObject.filterCountryOn != "")) {
+        createProductBlocky(myObject.neo, common2, '', '', 'debugPrints0');
     } else if (common1.length) {
-        createProductBlocky(neo, common1, '', '', 'debugPrints0');
-    } else if (productsRegionOn.length) {
-        createProductBlocky(neo, productsRegionOn, '', '', 'debugPrints0');
-    } else if (productsSectorOn.length) {
-        createProductBlocky(neo, productsSectorOn, '', '', 'debugPrints0');
+        createProductBlocky(myObject.neo, common1, '', '', 'debugPrints0');
+    } else if (myObject.productsRegionOn.length) {
+        createProductBlocky(myObject.neo, myObject.productsRegionOn, '', '', 'debugPrints0');
+    } else if (myObject.productsSectorOn.length) {
+        createProductBlocky(myObject.neo, myObject.productsSectorOn, '', '', 'debugPrints0');
     } else {
-        createProductBlocky(neo, trinity, '', '', 'debugPrints0');
+        createProductBlocky(myObject.neo, myObject.trinity, '', '', 'debugPrints0');
     }
-    if (((filterType != "Country") && (filterType != "Segment")) && ((filterRegionOn != "") || (filterSectorOn != ""))) {
-        createCountriesFilter(neo, common1, 6);
+    if (((filterType != "Country") && (filterType != "Segment")) && ((myObject.filterRegionOn != "") || (myObject.filterSectorOn != ""))) {
+        createCountriesFilter(myObject.neo, common1, 6);
     }
     if (filterType != "Segment") {
-        createSegmentFilter(neo, common2, 8);
+        createSegmentFilter(myObject.neo, common2, 8);
     }
     if (filterType == "Region") {
-        createSectorFilter(neo, productsRegionOn, 3, "yes");
+        createSectorFilter(myObject.neo, myObject.productsRegionOn, 3, "yes");
     }
     if (filterType == "Sector") {
-        createRegionFilter(neo, productsSectorOn, 4, "yes");
+        createRegionFilter(myObject.neo, myObject.productsSectorOn, 4, "yes");
     }
 }
-/*---- ------------------------------ ---------------------- ------------------------------ ----*/
 
-
-
-/*---- ------------------------------ ---------------------- ------------------------------ ----*/
 function createCountriesFilter(matrix, array, fieldToMatch) {
 
     let countryMatchArray = [];
@@ -287,7 +263,7 @@ function createCountriesFilter(matrix, array, fieldToMatch) {
         }
     }
     let countriesBoy = arrayNoDups(countryMatchArray);
-    createFilterOption(neo, 'testCountryFilterLocation', countriesBoy, 'Country', 'buttonCountryOff', 'buttonCountryOn');
+    createFilterOption(matrix, 'testCountryFilterLocation', countriesBoy, 'Country', 'buttonCountryOff', 'buttonCountryOn');
 }
 /*---- ------------------------------ ---------------------- ------------------------------ ----*/
 
@@ -305,7 +281,7 @@ function createSegmentFilter(matrix, array, fieldToMatch) {
         }
     }
     let segmentsBoy = arrayNoDups(segmentMatchArray);
-    createFilterOption(neo, 'testSegmentFilterLocation', segmentsBoy, 'Segment', 'buttonSegmentOff', 'buttonSegmentOn');
+    createFilterOption(matrix, 'testSegmentFilterLocation', segmentsBoy, 'Segment', 'buttonSegmentOff', 'buttonSegmentOn');
 }
 
 /*---- ------------------------------ ---------------------- ------------------------------ ----*/
@@ -324,10 +300,10 @@ function createSectorFilter(matrix, array, fieldToMatch) {
             for (let j = matrixLen; j--;)((matrix[j][2] == array[i]) && (matrix[j][fieldToMatch] != 'All')) ? sectorMatchArray.push(matrix[j][fieldToMatch]) : false
         }
     } else {
-        sectorMatchArray = arrayNoDups(returnFieldifMatch(neo, '3', '12', 'active'));
+        sectorMatchArray = arrayNoDups(returnFieldifMatch(matrix, '3', '12', 'active'));
     }
     let sectorBoy = arrayNoDups(sectorMatchArray);
-    createFilterOption(neo, 'testSectorFilterLocation', sectorBoy, 'Sector', 'buttonSectorOff', 'buttonSectorOn');
+    createFilterOption(matrix, 'testSectorFilterLocation', sectorBoy, 'Sector', 'buttonSectorOff', 'buttonSectorOn');
 }
 /*---- ------------------------------ ---------------------- ------------------------------ ----*/
 
@@ -344,10 +320,10 @@ function createRegionFilter(matrix, array, fieldToMatch) {
             for (let j = matrixLen; j--;)((matrix[j][2] == array[i]) && (matrix[j][fieldToMatch] != 'All')) ? regionMatchArray.push(matrix[j][fieldToMatch]) : false
         }
     } else {
-        regionMatchArray = arrayNoDups(returnFieldifMatch(neo, '4', '12', 'active'));
+        regionMatchArray = arrayNoDups(returnFieldifMatch(matrix, '4', '12', 'active'));
     }
     let regionBoy = arrayNoDups(regionMatchArray);
-    createFilterOption(neo, 'testRegionFilterLocation', regionBoy, 'Region', 'buttonRegionOff', 'buttonRegionOn');
+    createFilterOption(matrix, 'testRegionFilterLocation', regionBoy, 'Region', 'buttonRegionOff', 'buttonRegionOn');
 }
 /*---- ------------------------------ ---------------------- ------------------------------ ----*/
 
@@ -357,7 +333,7 @@ function createRegionFilter(matrix, array, fieldToMatch) {
 function subscribedClass(productId, productClassOn, checkboxId) {
 
     let target = document.getElementById(checkboxId).classList;
-    (target.contains(productClassOn)) ? (target.remove(productClassOn), removeFromArray(subscribedProducts, productId)) : (target.add(productClassOn), subscribedProducts.push(productId));
+    (target.contains(productClassOn)) ? (target.remove(productClassOn), removeFromArray(initialize.subscribedProducts, productId)) : (target.add(productClassOn), initialize.subscribedProducts.push(productId));
 }
 /*---- ------------------------------ ---------------------- ------------------------------ ----*/
 
@@ -370,60 +346,51 @@ function readyInterests() {
     let latamInput = document.getElementById('interestsLatam');
     let europeInput = document.getElementById('interestsEurope');
     let asiaInput = document.getElementById('interestsAsia');
-    let subProdLen = subscribedProducts.length;
+    let subProdLen = initialize.subscribedProducts.length;
 
     for (i = subProdLen; i--;) {
-        aux = returnFieldifMatch(neo, 4, 2, subscribedProducts[i]);
+        aux = returnFieldifMatch(neo, 4, 2, initialize.subscribedProducts[i]);
 
-        if ((aux == "Latin America") && (productInterestLatinAmerica)) {
-            productInterestLatinAmerica.push(subscribedProducts[i]);
-        } else if ((aux == "Europe") && (productInterestEurope)) {
-            productInterestEurope.push(subscribedProducts[i]);
-        } else if ((aux == "Asia") && (productInterestAsia)) {
-            productInterestAsia.push(subscribedProducts[i]);
+        if ((aux == "Latin America") && (initialize.productInterestLatinAmerica)) {
+            productInterestLatinAmerica.push(initialize.subscribedProducts[i]);
+        } else if ((aux == "Europe") && (initialize.productInterestEurope)) {
+            productInterestEurope.push(initialize.subscribedProducts[i]);
+        } else if ((aux == "Asia") && (initialize.productInterestAsia)) {
+            productInterestAsia.push(initialize.subscribedProducts[i]);
         }
-        if (subscribedProducts[i] === "") {
-            removeFromArray(subscribedProducts, subscribedProducts[i]);
+        if (initialize.subscribedProducts[i] === "") {
+            removeFromArray(initialize.subscribedProducts, initialize.subscribedProducts[i]);
         }
     }
 
-    allInput.value = arrayNoDups(subscribedProducts);
-    latamInput.value = changeParsers(arrayNoDups(productInterestLatinAmerica));
-    europeInput.value = changeParsers(arrayNoDups(productInterestEurope));
-    asiaInput.value = changeParsers(arrayNoDups(productInterestAsia));
+    allInput.value = arrayNoDups(initialize.subscribedProducts);
+    latamInput.value = changeParsers(arrayNoDups(initialize.productInterestLatinAmerica));
+    europeInput.value = changeParsers(arrayNoDups(initialize.productInterestEurope));
+    asiaInput.value = changeParsers(arrayNoDups(initialize.productInterestAsia));
 }
-/*---- ------------------------------ ---------------------- ------------------------------ ----*/
 
-
-
-/*---- ------------------------------ ---------------------- ------------------------------ ----*/
 function sortBy(param) {
     let notsubs = [];
-    array = subscribedProducts;
-    matrix = neo;
-    matrixLen = neo.length;
-    arrayLen = subscribedProducts.length;
-    (subscribedProducts[0] == "") ? subscribedProducts.shift(): false
+    let array = initialize.subscribedProducts;
+    let matrix = initialize.neo;
+    let matrixLen = matrix.length;
+    let arrayLen = initialize.subscribedProducts.length;
+    (initialize.subscribedProducts[0] == "") ? array.shift(): false
     clearInnerHTML("debugPrints0");
-    notsubs = trinity.filter(x => !subscribedProducts.includes(x));
+    notsubs = initialize.trinity.filter(x => !array.includes(x));
     if (param === "subscribed") {
-        createProductBlocky(neo, subscribedProducts, '', '', 'debugPrints0');
+        createProductBlocky(matrix, array, '', '', 'debugPrints0');
     } else if (param === "notsubscribed") {
-        createProductBlocky(neo, notsubs, '', '', 'debugPrints0');
+        createProductBlocky(matrix, notsubs, '', '', 'debugPrints0');
     } else if (param === "all") {
-        createProductBlocky(neo, trinity, '', '', 'debugPrints0');
+        createProductBlocky(matrix, initialize.trinity, '', '', 'debugPrints0');
     } else {
-        createProductBlocky(neo, trinity, '', '', 'debugPrints0');
+        createProductBlocky(matrix, initialize.trinity, '', '', 'debugPrints0');
     }
 }
-/*---- ------------------------------ ---------------------- ------------------------------ ----*/
 
-
-const changeParsers = (myArray = [], delim = ";") => myArray.toString().replace(/,/g, ";");
-/*---- ------------------------------ ---------------------- ------------------------------ ----*/
-
-/*---- ------------------------------ ---------------------- ------------------------------ ----*/
 function returnStuffy(type, targetPosition, filterType, filterOptionClassOn, filterOptionClassOff, filterArray) {
+    console.log(document.getElementById(targetPosition));
     thisOptionId = "OPTION" + filterType + filterArray;
     thisButtonId = type + filterType + filterArray;
     FilterOption = document.createElement(type);
@@ -441,14 +408,16 @@ function returnStuffy(type, targetPosition, filterType, filterOptionClassOn, fil
 
     /*(type == "BUTTON") ? (filterClass == filterOptionClassOn) ? (clearInnerHTML(targetPosition), document.getElementById(targetPosition).appendChild(FilterOption)) : false:*/
 
+
     document.getElementById(targetPosition).appendChild(FilterOption);
+    //document.getElementById(targetPosition).setAttribute("onchange",(this.options)?this.options[this.selectedIndex].onclick():false);
 }
 
 function createActiveButtons(filterType, activeArray) {
     let array = activeArray;
     let filter = filterType;
     let i = array.length;
-    let filterButton, classOn, classOff, thisOptionId, functionOnClickString, currentId;
+    let filterButton,filterSpan, classOn, classOff, thisOptionId, functionOnClickString, currentId;
     let targetFilter = "active" + filterType + "ButtonFiltersHere";
     clearInnerHTML(targetFilter);
     for (i; i--;) {
@@ -456,37 +425,42 @@ function createActiveButtons(filterType, activeArray) {
         classOn = "button" + filterType + "On";
         classOff = "button" + filterType + "Off";
         currentId = "activeButton" + array[i];
-        FilterButton = document.createElement("BUTTON");
-        FilterButton.setAttribute('id', currentId);
-        FilterButton.setAttribute('class', "buttonActive buttonActive1")
+        filterButton = document.createElement("BUTTON");
+        filterSpan = document.createElement("span");
+        filterSpan.setAttribute('id', "span"+currentId);
+        filterSpan.setAttribute('class', "spanActive");
+        filterButton.setAttribute('id', currentId);
+        filterButton.setAttribute('class', "buttonActive");
         functionOnClickString = "filtersClass('" + thisOptionId + "','" + classOn + "','" + classOff + "','" + currentId + "'),getFilters('" + filterType + "','" + classOn + "','" + classOff + "')";
-        FilterButton.setAttribute('onclick', functionOnClickString);
-        FilterButton.innerHTML = array[i];
-        document.getElementById(targetFilter).appendChild(FilterButton);
+        filterButton.innerHTML = array[i];
+        filterSpan.innerHTML = "x";
+
+        document.getElementById(targetFilter).removeAttribute("onclick");
+        document.getElementById(targetFilter).setAttribute("onclick",functionOnClickString);
+        filterButton.appendChild(filterSpan);
+        document.getElementById(targetFilter).appendChild(filterButton);
     }
 }
 /*---- ------------------------------ ---------------------- ------------------------------ ----*/
 
-function validateFilters(filterType, classesValueArray) {
+function validateFilters(filterType, classesValueArray, myObject) {
     console.log("validate filters");
     console.log(filterType);
     console.log(classesValueArray);
-    let common1 = setMatches(1);
-    let common2 = setMatches(2);
-    let common3 = setMatches(3);
+
     let blank = "";
     let i, len, currentList, currentName, FilterOptionDefault;
 
     if (filterType == "Sector") {
-        if ((classesValueArray == blank) || (productsCommonSecRegCon == blank)) {
+        if ((classesValueArray == blank) || (initialize.productsCommonSecRegCon == blank)) {
             clearInnerHTML("activeCountryFiltersHere");
             clearInnerHTML("activeSegmentFiltersHere");
             clearInnerHTML("activeCountryButtonFiltersHere");
             clearInnerHTML("activeSegmentButtonFiltersHere");
-        } else if ((productsCommonSecRegConSeg == blank) || (filterSegmentOn != blank)) {
+        } else if ((initialize.productsCommonSecRegConSeg == blank) || (initialize.filterSegmentOn != blank)) {
             clearInnerHTML("activeSegmentFiltersHere");
             clearInnerHTML("activeSegmentButtonFiltersHere");
-        } else if (productsCommonSecReg == blank) {
+        } else if (initialize.productsCommonSecReg == blank) {
             clearInnerHTML("activeRegionFiltersHere");
             clearInnerHTML("activeRegionButtonFiltersHere");
         }
@@ -498,14 +472,15 @@ function validateFilters(filterType, classesValueArray) {
         clearInnerHTML("activeSegmentButtonFiltersHere");
     }
     if (filterType == "Country") {
-        if ((classesValueArray == blank) || (productsCommonSecRegConSeg == blank) || (document.getElementById("testSegmentFilterLocation").innerHTML == "")) {
+        if ((classesValueArray == blank) || (initialize.productsCommonSecRegConSeg == blank) || (document.getElementById("testSegmentFilterLocation").innerHTML == "")) {
             clearInnerHTML("activeSegmentFiltersHere");
             clearInnerHTML("activeSegmentButtonFiltersHere");
         }
     }
     if (filterType === 'all') {
-        console.log("clear all");
+        console.time("clear all");
         arrayBlank = [];
+        myObject = initialize;
         refreshArrays();
         clearInnerHTML("activeSegmentButtonFiltersHere");
         clearInnerHTML("activeCountryButtonFiltersHere");
@@ -516,27 +491,33 @@ function validateFilters(filterType, classesValueArray) {
         clearInnerHTML("activeRegionFiltersHere");
         clearInnerHTML("activeSectorFiltersHere");
         clearInnerHTML("debugPrints0")
-        createProductBlocky(neo, trinity, '', '', 'debugPrints0');
-        createFilterOption(neo, 'testRegionFilterLocation', arrayNoDups(returnFieldifMatch(neo, '4', '12', 'active')), 'Region', 'buttonRegionOff', 'buttonRegionOn', 'no');
-        createFilterOption(neo, 'testSectorFilterLocation', arrayNoDups(returnFieldifMatch(neo, '3', '12', 'active')), 'Sector', 'buttonSectorOff', 'buttonSectorOn', 'no');
-        createFilterOption(neo, 'testCountryFilterLocation', arrayBlank, 'Country', 'buttonCountryOff', 'buttonCountryOn', 'no');
-        createFilterOption(neo, 'testSegmentFilterLocation', arrayBlank, 'Segment', 'buttonSegmentOff', 'buttonSegmentOn', 'no');
-    }
+        createProductBlocky(myObject.neo, myObject.trinity, '', '', 'debugPrints0');
+        createFilterOption(myObject.neo, 'testRegionFilterLocation', arrayNoDups(returnFieldifMatch(myObject.neo, '4', '12', 'active')), 'Region', 'buttonRegionOff', 'buttonRegionOn', 'no');
+        createFilterOption(myObject.neo, 'testSectorFilterLocation', arrayNoDups(returnFieldifMatch(myObject.neo, '3', '12', 'active')), 'Sector', 'buttonSectorOff', 'buttonSectorOn', 'no');
+        createFilterOption(myObject.neo, 'testCountryFilterLocation', arrayBlank, 'Country', 'buttonCountryOff', 'buttonCountryOn', 'no');
+        createFilterOption(myObject.neo, 'testSegmentFilterLocation', arrayBlank, 'Segment', 'buttonSegmentOff', 'buttonSegmentOn', 'no');
+        console.timeEnd("clear all");
+        }
 }
 /*---- ------------------------------ ---------------------- ------------------------------ ----*/
 
 function refreshArrays() {
-    productsSectorOn = [];
-    productsRegionOn = [];
-    productsCountryOn = [];
-    productsSegmentOn = [];
+    initialize.productsSectorOn = [];
+    initialize.productsRegionOn = [];
+    initialize.productsCountryOn = [];
+    initialize.productsSegmentOn = [];
 }
 
 function searchBox(input) {
     const targetPosition = document.getElementById("debugPrints0");
     let toMatch = input.toUpperCase();
     let matchedArray = [];
-    for (let i = trinity.length; i--;)(trinity[i].toUpperCase().indexOf(toMatch) > -1) ? matchedArray.push(trinity[i]) : false
+    for (let i = initialize.trinity.length; i--;)(initialize.trinity[i].toUpperCase().indexOf(toMatch) > -1) ? matchedArray.push(initialize.trinity[i]) : false
     clearInnerHTML("debugPrints0");
-    (matchedArray.length) ? createProductBlocky(neo, matchedArray, '', '', 'debugPrints0'): targetPosition.innerHTML = "SORRY NO PRODUCTS FOUND";
+    (matchedArray.length) ? createProductBlocky(initialize.neo, matchedArray, '', '', 'debugPrints0'): targetPosition.innerHTML = "SORRY NO PRODUCTS FOUND";
+}
+
+function filterSelect(target){
+  console.log(document.getElementById(target));
+  document.getElementById(target).setAttribute("onchange",this.options[this.selectedIndex].onclick());
 }
