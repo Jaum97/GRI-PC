@@ -2,6 +2,45 @@
 
 /* VERSION 0.0.18 | DATE 14-10-2018 */
 
+
+
+function initObj() {
+    var initialize = {
+        filterSectorOn: [],
+        filterRegionOn: [],
+        filterCountryOn: [],
+        filterSegmentOn: [],
+        productsSectorOn: [],
+        productsRegionOn: [],
+        productsCountryOn: [],
+        productsSegmentOn: [],
+        productsCommonSecReg: [],
+        productsCommonSecRegCon: [],
+        productsCommonSecRegConSeg: [],
+        productInterestLatinAmerica: [],
+        productInterestEurope: [],
+        productInterestAsia: [],
+        neo: [],
+        trinity: [],
+        subscribedProducts: []
+    };
+    return initialize;
+  }
+  function init(){
+  //let preferenceCenterObject = init();
+  console.log(preferenceCenterObject);
+    preferenceCenterObject.neo = doubleCSVtoMatrix('allDEFields', ';', '$');
+    preferenceCenterObject.trinity = returnFieldifMatch(preferenceCenterObject.neo, '2');
+    preferenceCenterObject.subscribedProducts = csvToArray(document.getElementById('testInterests').innerHTML, ';');
+
+    console.log('%c Important Variables', 'color: #31e2d4;font-weight:bold;');
+    //console.log({
+      //  initialize
+    //});
+    createProductBlocky(preferenceCenterObject.neo, preferenceCenterObject.trinity, '', '', 'debugPrints0');
+    createFilterOption(preferenceCenterObject.neo, 'testSectorFilterLocation', arrayNoDups(returnFieldifMatch(preferenceCenterObject.neo, '3', '12', 'active')), 'Sector', 'buttonSectorOff', 'buttonSectorOn', 'no');
+    createFilterOption(preferenceCenterObject.neo, 'testRegionFilterLocation', arrayNoDups(returnFieldifMatch(preferenceCenterObject.neo, '4', '12', 'active')), 'Region', 'buttonRegionOff', 'buttonRegionOn', 'no');
+}
 /*---- ------------------------------ DOUBLE CSV TO MATRIX ------------------------------ ----*/
 function doubleCSVtoMatrix(csvInputId, delim1, delim2) {
     let array1 = csvToArray(document.getElementById(csvInputId).innerHTML, delim1);
@@ -24,7 +63,7 @@ function createProductBlocky(matrix, wantedArray, fieldToCheck, fieldValue, targ
     let currentName;
     let checkboxClass = "";
     let classz = "subscribedOn";
-    let subscribedProds = initialize.subscribedProducts;
+    let subscribedProds = preferenceCenterObject.subscribedProducts;
     let subsLen = subscribedProds.length;
     for (i; i--;) {
         currentName = String(returnFieldifMatch(matrix, '2', '2', wantedArray[i]));
@@ -98,7 +137,7 @@ function createFilterOption(matrix, targetPosition, arrayFieldToLook, filterType
         FilterOptionDefault.setAttribute("selected", "selected");
         FilterOptionDefault.setAttribute("disabled", "true");
         FilterOptionDefault.setAttribute("hidden", "true");
-        FilterOptionDefault.setAttribute("onclick", myFunction());
+        //FilterOptionDefault.setAttribute("onclick", myFunction());
         document.getElementById(targetPosition).appendChild(FilterOptionDefault);
         //document.getElementById(targetPosition).setAttribute("onchange",filterSelect(targetPosition));
         for (i; i--;) returnStuffy("OPTION", targetPosition, filterType, filterOptionClassOn, filterOptionClassOff, filterArray[i]);
@@ -140,10 +179,10 @@ function getFilters(filterType) {
 
     document.getElementById(targetid).innerHTML = classesValueArray;
 
-    returnFieldifMatchArray(initialize.neo, 2, filterType, classesValueArray,initialize);
+    returnFieldifMatchArray(preferenceCenterObject.neo, 2, filterType, classesValueArray,preferenceCenterObject);
     console.log(classesValueArray);
     createActiveButtons(filterType, classesValueArray);
-    validateFilters(filterType, classesValueArray, initialize);
+    validateFilters(filterType, classesValueArray, preferenceCenterObject);
     return classesValueArray;
 }
 /*---- ------------------------------ ---------------------- ------------------------------ ----*/
@@ -173,7 +212,7 @@ function returnFieldifMatchArray(matrix, wantedField, filterType, classesValueAr
         }
     }
     updateProducts(filterType, matchedArray1);
-    createBlockys(filterType,initialize);
+    createBlockys(filterType,preferenceCenterObject);
     return matchedArray1;
 }
 /*---- ------------------------------ ---------------------- ------------------------------ ----*/
@@ -184,16 +223,16 @@ function returnFieldifMatchArray(matrix, wantedField, filterType, classesValueAr
 function convertNametoNumber(filterType, updateValue) {
     let filterNumber;
     if (filterType == "Sector") {
-        initialize.filterSectorOn = updateValue;
+        preferenceCenterObject.filterSectorOn = updateValue;
         filterNumber = "3";
     } else if (filterType == "Region") {
-        initialize.filterRegionOn = updateValue;
+        preferenceCenterObject.filterRegionOn = updateValue;
         filterNumber = "4";
     } else if (filterType == "Country") {
-        initialize.filterCountryOn = updateValue;
+        preferenceCenterObject.filterCountryOn = updateValue;
         filterNumber = "6";
     } else if (filterType == "Segment") {
-        initialize.filterSegmentOn = updateValue;
+        preferenceCenterObject.filterSegmentOn = updateValue;
         filterNumber = "8";
     } else {
         filterNumber = "13";
@@ -207,13 +246,13 @@ function convertNametoNumber(filterType, updateValue) {
 /*---- ------------------------------ ---------------------- ------------------------------ ----*/
 function updateProducts(filterType, updateValue) {
     if (filterType == "Sector") {
-        initialize.productsSectorOn = updateValue;
+        preferenceCenterObject.productsSectorOn = updateValue;
     } else if (filterType == "Region") {
-        initialize.productsRegionOn = updateValue;
+        preferenceCenterObject.productsRegionOn = updateValue;
     } else if (filterType == "Country") {
-        initialize.productsCountryOn = updateValue;
+        preferenceCenterObject.productsCountryOn = updateValue;
     } else if (filterType == "Segment") {
-        initialize.productsSegmentOn = updateValue;
+        preferenceCenterObject.productsSegmentOn = updateValue;
     }
 }
 
@@ -239,21 +278,25 @@ function createBlockys(filterType,myObject) {
         createProductBlocky(myObject.neo, myObject.trinity, '', '', 'debugPrints0');
     }
     if (((filterType != "Country") && (filterType != "Segment")) && ((myObject.filterRegionOn != "") || (myObject.filterSectorOn != ""))) {
-        createCountriesFilter(myObject.neo, common1, 6);
+        createFiltersFunction(myObject.neo, common1, 6,"Country");
     }
     if (filterType != "Segment") {
-        createSegmentFilter(myObject.neo, common2, 8);
+        createFiltersFunction(myObject.neo, common2, 8,"Segment");
     }
     if (filterType == "Region") {
-        createSectorFilter(myObject.neo, myObject.productsRegionOn, 3, "yes");
+        createFiltersFunction(myObject.neo, myObject.productsRegionOn, 3, "Sector");
     }
     if (filterType == "Sector") {
-        createRegionFilter(myObject.neo, myObject.productsSectorOn, 4, "yes");
+        createFiltersFunction(myObject.neo, myObject.productsSectorOn, 4, "Region");
     }
 }
 
-function createCountriesFilter(matrix, array, fieldToMatch) {
-
+function createFiltersFunction(matrix, array, fieldToMatch,filterType) {
+    console.log(matrix, array, fieldToMatch,filterType);
+    let type = filterType;
+    let classOn = "button"+type+"On";
+    let classOff = "button"+type+"Off";
+    let target = "test"+type+"FilterLocation";
     let countryMatchArray = [];
     let arrayLen = array.length;
     let matrixLen = matrix.length;
@@ -263,77 +306,13 @@ function createCountriesFilter(matrix, array, fieldToMatch) {
         }
     }
     let countriesBoy = arrayNoDups(countryMatchArray);
-    createFilterOption(matrix, 'testCountryFilterLocation', countriesBoy, 'Country', 'buttonCountryOff', 'buttonCountryOn');
-}
-/*---- ------------------------------ ---------------------- ------------------------------ ----*/
-
-
-
-/*---- ------------------------------ ---------------------- ------------------------------ ----*/
-function createSegmentFilter(matrix, array, fieldToMatch) {
-    let type = "Segment";
-    let segmentMatchArray = [];
-    let arrayLen = array.length;
-    let matrixLen = matrix.length;
-    if (arrayLen) {
-        for (let i = arrayLen; i--;) {
-            for (let j = matrixLen; j--;)((matrix[j][2] == array[i]) && (matrix[j][fieldToMatch] != 'All')) ? segmentMatchArray.push(matrix[j][fieldToMatch]) : false
-        }
-    }
-    let segmentsBoy = arrayNoDups(segmentMatchArray);
-    createFilterOption(matrix, 'testSegmentFilterLocation', segmentsBoy, 'Segment', 'buttonSegmentOff', 'buttonSegmentOn');
+    createFilterOption(matrix, target , countriesBoy, type, classOn, classOff);
 }
 
-/*---- ------------------------------ ---------------------- ------------------------------ ----*/
-
-
-
-/*---- ------------------------------ ---------------------- ------------------------------ ----*/
-function createSectorFilter(matrix, array, fieldToMatch) {
-
-    let type = "Sector";
-    let sectorMatchArray = [];
-    let arrayLen = array.length;
-    let matrixLen = matrix.length;
-    if (arrayLen) {
-        for (let i = arrayLen; i--;) {
-            for (let j = matrixLen; j--;)((matrix[j][2] == array[i]) && (matrix[j][fieldToMatch] != 'All')) ? sectorMatchArray.push(matrix[j][fieldToMatch]) : false
-        }
-    } else {
-        sectorMatchArray = arrayNoDups(returnFieldifMatch(matrix, '3', '12', 'active'));
-    }
-    let sectorBoy = arrayNoDups(sectorMatchArray);
-    createFilterOption(matrix, 'testSectorFilterLocation', sectorBoy, 'Sector', 'buttonSectorOff', 'buttonSectorOn');
-}
-/*---- ------------------------------ ---------------------- ------------------------------ ----*/
-
-
-
-/*---- ------------------------------ ---------------------- ------------------------------ ----*/
-function createRegionFilter(matrix, array, fieldToMatch) {
-    let type = "Region";
-    let regionMatchArray = [];
-    let arrayLen = array.length;
-    let matrixLen = matrix.length;
-    if (arrayLen) {
-        for (let i = arrayLen; i--;) {
-            for (let j = matrixLen; j--;)((matrix[j][2] == array[i]) && (matrix[j][fieldToMatch] != 'All')) ? regionMatchArray.push(matrix[j][fieldToMatch]) : false
-        }
-    } else {
-        regionMatchArray = arrayNoDups(returnFieldifMatch(matrix, '4', '12', 'active'));
-    }
-    let regionBoy = arrayNoDups(regionMatchArray);
-    createFilterOption(matrix, 'testRegionFilterLocation', regionBoy, 'Region', 'buttonRegionOff', 'buttonRegionOn');
-}
-/*---- ------------------------------ ---------------------- ------------------------------ ----*/
-
-
-
-/*---- ------------------------------ ---------------------- ------------------------------ ----*/
 function subscribedClass(productId, productClassOn, checkboxId) {
 
     let target = document.getElementById(checkboxId).classList;
-    (target.contains(productClassOn)) ? (target.remove(productClassOn), removeFromArray(initialize.subscribedProducts, productId)) : (target.add(productClassOn), initialize.subscribedProducts.push(productId));
+    (target.contains(productClassOn)) ? (target.remove(productClassOn), removeFromArray(preferenceCenterObject.subscribedProducts, productId)) : (target.add(productClassOn), preferenceCenterObject.subscribedProducts.push(productId));
 }
 /*---- ------------------------------ ---------------------- ------------------------------ ----*/
 
@@ -346,54 +325,54 @@ function readyInterests() {
     let latamInput = document.getElementById('interestsLatam');
     let europeInput = document.getElementById('interestsEurope');
     let asiaInput = document.getElementById('interestsAsia');
-    let subProdLen = initialize.subscribedProducts.length;
+    let subProdLen = preferenceCenterObject.subscribedProducts.length;
 
     for (i = subProdLen; i--;) {
-        aux = returnFieldifMatch(neo, 4, 2, initialize.subscribedProducts[i]);
+        aux = returnFieldifMatch(neo, 4, 2, preferenceCenterObject.subscribedProducts[i]);
 
-        if ((aux == "Latin America") && (initialize.productInterestLatinAmerica)) {
-            productInterestLatinAmerica.push(initialize.subscribedProducts[i]);
-        } else if ((aux == "Europe") && (initialize.productInterestEurope)) {
-            productInterestEurope.push(initialize.subscribedProducts[i]);
-        } else if ((aux == "Asia") && (initialize.productInterestAsia)) {
-            productInterestAsia.push(initialize.subscribedProducts[i]);
+        if ((aux == "Latin America") && (preferenceCenterObject.productInterestLatinAmerica)) {
+            productInterestLatinAmerica.push(preferenceCenterObject.subscribedProducts[i]);
+        } else if ((aux == "Europe") && (preferenceCenterObject.productInterestEurope)) {
+            productInterestEurope.push(preferenceCenterObject.subscribedProducts[i]);
+        } else if ((aux == "Asia") && (preferenceCenterObject.productInterestAsia)) {
+            productInterestAsia.push(preferenceCenterObject.subscribedProducts[i]);
         }
-        if (initialize.subscribedProducts[i] === "") {
-            removeFromArray(initialize.subscribedProducts, initialize.subscribedProducts[i]);
+        if (preferenceCenterObject.subscribedProducts[i] === "") {
+            removeFromArray(preferenceCenterObject.subscribedProducts, preferenceCenterObject.subscribedProducts[i]);
         }
     }
 
-    allInput.value = arrayNoDups(initialize.subscribedProducts);
-    latamInput.value = changeParsers(arrayNoDups(initialize.productInterestLatinAmerica));
-    europeInput.value = changeParsers(arrayNoDups(initialize.productInterestEurope));
-    asiaInput.value = changeParsers(arrayNoDups(initialize.productInterestAsia));
+    allInput.value = arrayNoDups(preferenceCenterObject.subscribedProducts);
+    latamInput.value = changeParsers(arrayNoDups(preferenceCenterObject.productInterestLatinAmerica));
+    europeInput.value = changeParsers(arrayNoDups(preferenceCenterObject.productInterestEurope));
+    asiaInput.value = changeParsers(arrayNoDups(preferenceCenterObject.productInterestAsia));
 }
 
 function sortBy(param) {
     let notsubs = [];
-    let array = initialize.subscribedProducts;
-    let matrix = initialize.neo;
+    let array = preferenceCenterObject.subscribedProducts;
+    let matrix = preferenceCenterObject.neo;
     let matrixLen = matrix.length;
-    let arrayLen = initialize.subscribedProducts.length;
-    (initialize.subscribedProducts[0] == "") ? array.shift(): false
+    let arrayLen = preferenceCenterObject.subscribedProducts.length;
+    (preferenceCenterObject.subscribedProducts[0] == "") ? array.shift(): false
     clearInnerHTML("debugPrints0");
-    notsubs = initialize.trinity.filter(x => !array.includes(x));
+    notsubs = preferenceCenterObject.trinity.filter(x => !array.includes(x));
     if (param === "subscribed") {
         createProductBlocky(matrix, array, '', '', 'debugPrints0');
     } else if (param === "notsubscribed") {
         createProductBlocky(matrix, notsubs, '', '', 'debugPrints0');
     } else if (param === "all") {
-        createProductBlocky(matrix, initialize.trinity, '', '', 'debugPrints0');
+        createProductBlocky(matrix, preferenceCenterObject.trinity, '', '', 'debugPrints0');
     } else {
-        createProductBlocky(matrix, initialize.trinity, '', '', 'debugPrints0');
+        createProductBlocky(matrix, preferenceCenterObject.trinity, '', '', 'debugPrints0');
     }
 }
 
 function returnStuffy(type, targetPosition, filterType, filterOptionClassOn, filterOptionClassOff, filterArray) {
-    console.log(document.getElementById(targetPosition));
+    //console.log(document.getElementById(targetPosition));
     thisOptionId = "OPTION" + filterType + filterArray;
     thisButtonId = type + filterType + filterArray;
-    FilterOption = document.createElement(type);
+    FilterOption = document.createElement("BUTTON");
     FilterOption.setAttribute('id', thisButtonId);
     functionOnClickString = "filtersClass('" + thisOptionId + "','" + filterOptionClassOn + "','" + filterOptionClassOff + "'),getFilters('" + filterType + "','" + filterOptionClassOn + "','" + filterOptionClassOff + "')";
     activeFilters = "active" + filterType + "FiltersHere";
@@ -452,15 +431,15 @@ function validateFilters(filterType, classesValueArray, myObject) {
     let i, len, currentList, currentName, FilterOptionDefault;
 
     if (filterType == "Sector") {
-        if ((classesValueArray == blank) || (initialize.productsCommonSecRegCon == blank)) {
+        if ((classesValueArray == blank) || (preferenceCenterObject.productsCommonSecRegCon == blank)) {
             clearInnerHTML("activeCountryFiltersHere");
             clearInnerHTML("activeSegmentFiltersHere");
             clearInnerHTML("activeCountryButtonFiltersHere");
             clearInnerHTML("activeSegmentButtonFiltersHere");
-        } else if ((initialize.productsCommonSecRegConSeg == blank) || (initialize.filterSegmentOn != blank)) {
+        } else if ((preferenceCenterObject.productsCommonSecRegConSeg == blank) || (preferenceCenterObject.filterSegmentOn != blank)) {
             clearInnerHTML("activeSegmentFiltersHere");
             clearInnerHTML("activeSegmentButtonFiltersHere");
-        } else if (initialize.productsCommonSecReg == blank) {
+        } else if (preferenceCenterObject.productsCommonSecReg == blank) {
             clearInnerHTML("activeRegionFiltersHere");
             clearInnerHTML("activeRegionButtonFiltersHere");
         }
@@ -472,7 +451,7 @@ function validateFilters(filterType, classesValueArray, myObject) {
         clearInnerHTML("activeSegmentButtonFiltersHere");
     }
     if (filterType == "Country") {
-        if ((classesValueArray == blank) || (initialize.productsCommonSecRegConSeg == blank) || (document.getElementById("testSegmentFilterLocation").innerHTML == "")) {
+        if ((classesValueArray == blank) || (preferenceCenterObject.productsCommonSecRegConSeg == blank) || (document.getElementById("testSegmentFilterLocation").innerHTML == "")) {
             clearInnerHTML("activeSegmentFiltersHere");
             clearInnerHTML("activeSegmentButtonFiltersHere");
         }
@@ -480,7 +459,7 @@ function validateFilters(filterType, classesValueArray, myObject) {
     if (filterType === 'all') {
         console.time("clear all");
         arrayBlank = [];
-        myObject = initialize;
+        myObject = preferenceCenterObject;
         refreshArrays();
         clearInnerHTML("activeSegmentButtonFiltersHere");
         clearInnerHTML("activeCountryButtonFiltersHere");
@@ -500,23 +479,20 @@ function validateFilters(filterType, classesValueArray, myObject) {
         }
 }
 /*---- ------------------------------ ---------------------- ------------------------------ ----*/
-
 function refreshArrays() {
-    initialize.productsSectorOn = [];
-    initialize.productsRegionOn = [];
-    initialize.productsCountryOn = [];
-    initialize.productsSegmentOn = [];
+    preferenceCenterObject.productsSectorOn = [];
+    preferenceCenterObject.productsRegionOn = [];
+    preferenceCenterObject.productsCountryOn = [];
+    preferenceCenterObject.productsSegmentOn = [];
 }
-
 function searchBox(input) {
     const targetPosition = document.getElementById("debugPrints0");
     let toMatch = input.toUpperCase();
     let matchedArray = [];
-    for (let i = initialize.trinity.length; i--;)(initialize.trinity[i].toUpperCase().indexOf(toMatch) > -1) ? matchedArray.push(initialize.trinity[i]) : false
+    for (let i = preferenceCenterObject.trinity.length; i--;)(preferenceCenterObject.trinity[i].toUpperCase().indexOf(toMatch) > -1) ? matchedArray.push(preferenceCenterObject.trinity[i]) : false
     clearInnerHTML("debugPrints0");
-    (matchedArray.length) ? createProductBlocky(initialize.neo, matchedArray, '', '', 'debugPrints0'): targetPosition.innerHTML = "SORRY NO PRODUCTS FOUND";
+    (matchedArray.length) ? createProductBlocky(preferenceCenterObject.neo, matchedArray, '', '', 'debugPrints0'): targetPosition.innerHTML = "SORRY NO PRODUCTS FOUND";
 }
-
 function filterSelect(target){
   console.log(document.getElementById(target));
   document.getElementById(target).setAttribute("onchange",this.options[this.selectedIndex].onclick());
