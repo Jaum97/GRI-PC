@@ -920,11 +920,12 @@
                 <table>
                       <div id="testInterests" style="display:none;"></div>
                       <div class="posFixed">
-                    <select id="sortBy">
-                        <option onclick="sortBy('all')" value="all">all events</option>
-                        <option onclick="sortBy('subscribed')" value="subscribed">subscribed</option>
-                        <option onclick="sortBy('notsubscribed')" value="notsubscribed">not subscribed</option>
-                    </select>
+                        <div style="display:block;">
+                            Sort By Subscription<br>
+                            <button onclick="sortBy('all')"> all </button><br>
+                            <button onclick="sortBy('subscribed')"> subs </button><br>
+                            <button onclick="sortBy('notsubscribed')"> not subs </button><br>
+                        </div>
                     <form name="myForm" action="https://pub.s7.exacttarget.com/xyux4cxcmgn" onsubmit="return readyInterests()" method="post">
                         <input id="ContactEmail" name="ContactEmail" value="%%=v(@ContactEmail)=%%" style="display:none">
                         <input id="ContactID" name="ContactID" value="%%=v(@ContactID)=%%" style="display:none">
@@ -965,12 +966,6 @@
                         <span id="activeSegmentButtonFiltersHere"></span><a href="#" onclick="validateFilters('all',0)">clear all</a>
                     </div>
                     <th><br>
-                        <div style="display:none;border-style:solid;">
-                            Sort By Subscription<br>
-                            <button onclick="sortBy('all')"> all </button><br>
-                            <button onclick="sortBy('subscribed')"> subs </button><br>
-                            <button onclick="sortBy('notsubscribed')"> not subs </button><br>
-                        </div>
                     </th>
                 </table>
             </div>
@@ -989,7 +984,7 @@
     </div>
     <script id="functionCalls">
           let preferenceCenterObject = initObj();
-          init();
+          init(preferenceCenterObject);
     </script>
 </body>
 
