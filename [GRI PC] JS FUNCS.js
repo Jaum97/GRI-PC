@@ -36,8 +36,8 @@ function createProductBlocky(matrix, wantedArray, targetLocationId) {
 
             toggleButtonFunction = "subscribedClass('" + currentName + "','" + classz + "','" + dynamicINPUT.id + "')";
 
-            //dynamicINPUT.setAttribute('onclick', toggleButtonFunction);
-            dynamicINPUT.addEventListener('onclick', toggleButtonFunction);
+            dynamicINPUT.setAttribute('onclick', toggleButtonFunction);
+            //dynamicINPUT.addEventListener('onclick', toggleButtonFunction);
             dynamicSPAN2.setAttribute('class', 'slider round');
             dynamicSPAN.setAttribute("id", 'testSPANId' + currentName);
             dynamicSPAN.innerHTML = currentName;
@@ -168,11 +168,12 @@ function createFilterOption(matrix, targetPosition, arrayToMatch, filterType, cl
 }
 
 function returnStuffy(type, targetPosition, filterType, classOn, classOff, filterArray) {
-    let thisId, filterOption, functionOnClickString, activeFilters, activeFilterLen, filterClass;
+    let thisId, filterOption, functionOnClickString, activeFilters, activeFilterLen, filterClass,jump;
     thisId = "OPTION" + filterType + filterArray;
     activeFilters = "active" + filterType + "FiltersHere";
     activeFiltersArray = csvToArray(document.getElementById(activeFilters).innerHTML, ',');
     filterOption = document.createElement("BUTTON");
+	jump = document.createElement("BR");
     filterOption.setAttribute('id', thisId);
     functionOnClickString = "filtersClass('" + thisId + "','" + classOn + "','" + classOff + "'),getFilters('" + filterType + "','" + classOn + "','" + classOff + "')";
     for (let j = activeFiltersArray.length; j--;) filterClass = (activeFiltersArray[j] == filterArray) ? classOn : classOff
@@ -180,6 +181,7 @@ function returnStuffy(type, targetPosition, filterType, classOn, classOff, filte
     filterOption.innerHTML = filterArray;
     filterOption.setAttribute('value', filterArray);
     filterOption.setAttribute('onclick', functionOnClickString);
+	(document.getElementById(targetPosition).innerHTML) ? document.getElementById(targetPosition).appendChild(jump):false
     document.getElementById(targetPosition).appendChild(filterOption);
 }
 

@@ -7,8 +7,94 @@
     <title>GRI Preference Center</title>
     <!--<meta name="description" content="">-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <style>
+      .btn{
+        width:150px;
+        max-width:150px;
+        background-color: transparent;
+        border-style: groove;
+        border-color: black;
+      }
+      .btn-info{
+        width:150px;
+        max-width:150px;
 
-    <style id="filterRemoveButtons">
+      }
+      .btn:hover{
+        width:150px;
+        max-width:150px;
+        background-color: #9a9ba0;
+      }
+      }
+      </style>
+<style>
+      body{
+        background: #576982;
+        font-size: 14px;
+        font-family: 'Roboto', sans-serif;
+        margin: 0px;
+      }
+      /* Formatting */
+      i, em {
+        font-style: italic;
+      }
+      b, strong {
+        color: #e9702e;
+      }
+      a {
+        text-decoration: none;
+        -webkit-transition:All 0.3s ease-in-out;
+        -moz-transition:All 0.3s ease-in-out;
+        -o-transition:All 0.3s ease-in-out;
+      }
+      a:hover, a:active {
+        text-decoration: none;
+        -webkit-transition:All 0.3s ease-in-out;
+        -moz-transition:All 0.3s ease-in-out;
+        -o-transition:All 0.3s ease-in-out;
+      }
+      /* Header Bar */
+      #header{
+        width: calc(100% - 20px);
+        float:left;
+        padding: 15px;
+        background: #111d2d;
+        display: block;
+        height: 50px;
+      }
+      /* Calling GRI Logo */
+      #main-header{
+        width:800px;
+        position: relative;
+        display: block;
+        margin: 0px auto;
+        height: 30px;
+        background: url('http://www.griclub.org/uploads/arquivo/griclub.svg')no-repeat right center;
+      }
+      /* Container */
+      #pre-container {
+        width: 100%;
+        height: auto;
+        position: relative;
+        float: left;
+      }
+      #container {
+        width: calc(1200px - 120px);
+        position: relative;
+        margin: 0px auto;
+        padding: 60px;
+        background: #c5c8cc;
+        font-family: Roboto;
+        color: #0a0908;
+        font-size: 16px;
+        line-height: 1.875;
+        text-align: justify;
+      }
+      </style>
+<style id="filterRemoveButtons">
         .buttonActive{
       height: 30px;
       width: 110px;
@@ -44,15 +130,19 @@
     width: 30px;
     min-width: 30px;
     }
-    </style>
+</style>
     <style id="filtersButtonStyle">
         .list{
           max-width:150px;
+          height: 40px;
           clear:both;
           padding: 10px;
       }
       .filterTD{
-        max-width:200px;
+        width:180px;
+        max-width:180px;
+        height: 70px;
+        max-height: 70px;
         border-style:solid;
         text-align:center;
         margin:auto;
@@ -221,519 +311,6 @@
         -moz-animation-name: bounce;
       }
     </style>
-    <!--<style id="materialChaseBodyStyle">
-        body{
-        background: #efefef;
-        font-size: 14px;
-        font-family: 'Roboto', sans-serif;
-        margin: 0px;
-      }
-      /* Formatting */
-      i, em {
-        font-style: italic;
-      }
-      b, strong {
-        color: #e9702e;
-      }
-      a {
-        text-decoration: none;
-        -webkit-transition:All 0.3s ease-in-out;
-        -moz-transition:All 0.3s ease-in-out;
-        -o-transition:All 0.3s ease-in-out;
-      }
-      a:hover, a:active {
-        text-decoration: none;
-        -webkit-transition:All 0.3s ease-in-out;
-        -moz-transition:All 0.3s ease-in-out;
-        -o-transition:All 0.3s ease-in-out;
-      }
-
-      /* Header Bar */
-      #header{
-        width: calc(100% - 30px);
-        float:left;
-        padding: 15px;
-        background: #123669;
-        display: block;
-        height: 30px;
-        float: left;
-      }
-      /* Calling GRI Logo */
-      #main-header{
-        width:800px;
-        position: relative;
-        display: block;
-        margin: 0px auto;
-        height: 30px;
-        background: url('http://www.griclub.org/uploads/arquivo/griclub.svg')no-repeat right center;
-      }
-      /* Container */
-      #pre-container {
-        width: 100%;
-        height: auto;
-        position: relative;
-        float: left;
-      }
-      #container {
-        width: calc(1000px - 120px);
-        position: relative;
-        margin: 0px auto;
-        padding: 60px;
-        background: #fff;
-        font-family: Roboto;
-        color: #767676;
-        font-size: 16px;
-        line-height: 1.875;
-        text-align: justify;
-      }
-      /* Introduction Text */
-      #texto-um {
-        width: 100%;
-        padding-bottom: 40px;
-        border-bottom: 7px solid #e9702e;
-        margin: 0px auto;
-        font-style: italic;
-        margin-bottom: 40px;
-      }
-      /* Information */
-      #info {
-        width: 600px;
-        margin: 0px auto;
-      }
-      #info ul {
-        list-style-image: url('http://www.griclub.org/uploads/arquivo/arrow.svg');
-      }
-      #info li {
-        padding: 15px;
-      }
-      hr {
-        border: 0px;
-        margin: 0px;
-        padding: 0px;
-        border-top: 1px solid #9f9f9f;
-        margin: 0px auto;
-        width: 100%;
-      }
-      /* Buttons */
-      .button {
-        background-color: #fff;
-        border: 1px solid #404040;
-        color: #404040;
-        font-family: Roboto;
-        text-align: center;
-        font-size: 16px;
-        padding: 20px;
-        width: 180px;
-        transition: all 0.5s;
-        cursor: pointer;
-        margin: 20px;
-        text-transform: uppercase;
-      }
-      .button a {
-        color: #404040;
-        text-decoration: none;
-      }
-      .button span {
-        cursor: pointer;
-        display: inline-block;
-        position: relative;
-        transition: 0.5s;
-      }
-      .button span:after {
-        content: '\00bb';
-        position: absolute;
-        opacity: 0;
-        top: 0;
-        right: -20px;
-        transition: 0.5s;
-      }
-      .button:hover span {
-        padding-right: 35px;
-      }
-      .button:hover span:after {
-        opacity: 1;
-        right: 0;
-      }
-      .button2 {
-        background-color: #e9702e;
-        border: none;
-        color: #FFFFFF;
-        text-align: center;
-        font-size: 16px;
-        font-family: Roboto;
-        padding: 20px;
-        width: 180px;
-        transition: all 0.5s;
-        cursor: pointer;
-        margin: 20px;
-        text-transform: uppercase;
-        box-shadow: 0px 13px 24px 0px rgba(0, 0, 0, 0.15);
-      }
-      .button2 a {
-        color: #ffffff;
-        text-decoration: none;
-      }
-      .button2 span {
-        cursor: pointer;
-        display: inline-block;
-        position: relative;
-        transition: 0.5s;
-      }
-      .button2 span:after {
-        content: '\00bb';
-        position: absolute;
-        opacity: 0;
-        top: 0;
-        right: -20px;
-        transition: 0.5s;
-      }
-      .button2:hover span {
-        padding-right: 35px;
-      }
-      .button2:hover span:after {
-        opacity: 1;
-        right: 0;
-      }
-      .button3 {
-        background-color: #e9702e;
-        border: none;
-        color: #FFFFFF;
-        text-align: center;
-        font-size: 16px;
-        font-family: Roboto;
-        padding: 20px;
-        width: 180px;
-        transition: all 0.5s;
-        cursor: pointer;
-        margin: 20px;
-        margin-left: 0px;
-        text-transform: uppercase;
-        box-shadow: 0px 13px 24px 0px rgba(0, 0, 0, 0.15);
-      }
-      .button3 a {
-        color: #ffffff;
-        text-decoration: none;
-      }
-      .button3 span {
-        cursor: pointer;
-        display: inline-block;
-        position: relative;
-        transition: 0.5s;
-      }
-      .button3 span:before {
-        content: '\00AB';
-        position: absolute;
-        opacity: 0;
-        top: 0;
-        left: -20px;
-        transition: 0.5s;
-      }
-      .button3:hover span {
-        padding-left: 25px;
-      }
-      .button3:hover span:before {
-        opacity: 1;
-        left: 0;
-      }
-      h1{
-        font-size: 30px;
-        font-family: "Roboto";
-        color: #123669;
-        position: relative;
-        text-align: center;
-        padding-bottom: 25px;
-      }
-      h1:after {
-        content: " ";
-        width: 115px;
-        height: 10px;
-        background-color: #e9702e;
-        position: absolute;
-        left:calc(50% - 57px);
-        bottom: 0px;
-      }
-      .helperText{
-        font-size: 10px;
-      }
-      input[type=text], select, textarea {
-        -webkit-appearance:none;
-        width: 100% ;
-        padding: 20px 20px !important;
-        margin: 5px 0;
-        display: inline-block;
-        font-family: Roboto;
-        font-size: 14px;
-        font-weight: 400;
-        border: 1px solid #9f9f9f;
-        background: #ffffff;
-        color: #9f9f9f;
-        border-radius: 5px !important;
-        box-sizing: border-box;
-        box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0);
-        -webkit-transition:All 0.3s ease-in-out;
-        -moz-transition:All 0.3s ease-in-out;
-        -o-transition:All 0.3s ease-in-out;
-      }
-      select {
-        padding-left: 20px;
-        background: url('http://www.griclub.org/uploads/arquivo/arrow_down.svg')no-repeat;
-        background-position: center right 30px;
-      }
-      input::-webkit-input-placeholder, select::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
-        color: #3a3a3a;
-        -webkit-transition:All 0.3s ease-in-out;
-        -moz-transition:All 0.3s ease-in-out;
-        -o-transition:All 0.3s ease-in-out;
-      }
-      input:focus::-webkit-input-placeholder, textarea:focus::-webkit-input-placeholder {
-        color: #e9702e;
-        -webkit-transition:All 0.3s ease-in-out;
-        -moz-transition:All 0.3s ease-in-out;
-        -o-transition:All 0.3s ease-in-out;
-      }
-      /* Firefox < 19 */
-      input:-moz-placeholder, select:-moz-placeholder, textarea:-moz-placeholder  {
-        color: #3a3a3a;
-        -webkit-transition:All 0.3s ease-in-out;
-        -moz-transition:All 0.3s ease-in-out;
-        -o-transition:All 0.3s ease-in-out;
-      }
-      input:focus:-moz-placeholder, textarea:focus:-moz-placeholder {
-        color: #e9702e;
-        -webkit-transition:All 0.3s ease-in-out;
-        -moz-transition:All 0.3s ease-in-out;
-        -o-transition:All 0.3s ease-in-out;
-      }
-      /* Firefox > 19 */
-      input::-moz-placeholder, select::-moz-placeholder, textarea::-moz-placeholder  {
-        color: #3a3a3a;
-        -webkit-transition:All 0.3s ease-in-out;
-        -moz-transition:All 0.3s ease-in-out;
-        -o-transition:All 0.3s ease-in-out;
-      }
-      input:focus::-moz-placeholder, textarea:focus::-moz-placeholder  {
-        color: #e9702e;
-        -webkit-transition:All 0.3s ease-in-out;
-        -moz-transition:All 0.3s ease-in-out;
-        -o-transition:All 0.3s ease-in-out;
-      }
-      /* Internet Explorer 10 */
-      input:-ms-input-placeholder, select:-ms-input-placeholder, textarea:-ms-input-placeholder {
-        color: #3a3a3a;
-        -webkit-transition:All 0.3s ease-in-out;
-        -moz-transition:All 0.3s ease-in-out;
-        -o-transition:All 0.3s ease-in-out;
-      }
-      input:focus:-ms-input-placeholder {
-        color: #e9702e;
-        -webkit-transition:All 0.3s ease-in-out;
-        -moz-transition:All 0.3s ease-in-out;
-        -o-transition:All 0.3s ease-in-out;
-      }
-      input[type=text]:focus, select:focus, textarea:focus {
-        border: 1px solid #e9702e;
-        outline: none;
-        color: #e9702e;
-        -webkit-transition:All 0.3s ease-in-out;
-        -moz-transition:All 0.3s ease-in-out;
-        -o-transition:All 0.3s ease-in-out;
-        box-shadow: 0px 13px 24px 0px rgba(0, 0, 0, 0.05);
-      }
-      input[type=submit] {
-        background-color: #e9702e;
-        border: none;
-        color: #FFFFFF;
-        text-align: center;
-        font-size: 16px;
-        font-family: Roboto;
-        padding: 20px;
-        width: 180px;
-        transition: all 0.5s;
-        cursor: pointer;
-        margin: 20px;
-        text-transform: uppercase;
-        box-shadow: 0px 13px 24px 0px rgba(0, 0, 0, 0.15);
-      }
-      #form {
-        text-align: left !important;
-      }
-      #foreign-text{
-        width: calc(80% - 80px);
-        position: relative;
-        margin: 20px auto;
-        padding: 40px;
-        padding-bottom: 10px;
-        background: rgba(0,0,0,0.08);
-        color: rgba(0,0,0,0.4);
-        font-size: 14px;
-        text-align: justify;
-      }
-      #foreign-link {
-        text-align: center;
-      }
-      #foreign-link a {
-        background-color: #e9702e;
-        border: none;
-        color: #FFFFFF;
-        text-align: center;
-        font-size: 16px;
-        font-family: Roboto;
-        padding: 20px;
-        width: 180px;
-        transition: all 0.5s;
-        cursor: pointer;
-        text-transform: uppercase;
-        box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0);
-        line-height: 50px;
-      }
-      #foreign-link a:hover {
-        background-color: #123669;
-        box-shadow: 0px 13px 24px 0px rgba(0, 0, 0, 0.15);
-        margin-bottom:10px;
-      }
-      #foreign-link button {
-        background-color: #e9702e;
-        border: none;
-        color: #FFFFFF;
-        text-align: center;
-        font-size: 16px;
-        font-family: Roboto;
-        padding: 15px;
-        width: 200px;
-        transition: all 0.5s;
-        cursor: pointer;
-        text-transform: uppercase;
-        box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0);
-        line-height: 50px;
-      }
-      #foreign-link button:hover {
-        background-color: #123669;
-        box-shadow: 0px 13px 24px 0px rgba(0, 0, 0, 0.15);
-        margin-bottom:10px;
-      }
-      #nofloat {
-        width: calc(50% - 20px);
-        padding-right: 20px;
-        clear: right;
-      }
-      #floatleft {
-        width: calc(50% - 20px);
-        padding-right: 20px;
-        float: left;
-      }
-      #floatright {
-        width: calc(50% - 20px);
-        padding-left: 20px;
-        float: right;
-      }
-      #nofloat2 {
-        width: calc(50% - 20px);
-        padding-right: 20px;
-        clear: right;
-      }
-      #condition {
-        font-size: 12px;
-        font-family: "Roboto";
-        color: rgb(137, 137, 137);
-        font-weight: bold;
-        text-transform: uppercase;
-        display: block;
-        margin-top: -20px;
-      }
-      #condition-2 {
-        font-size: 12px;
-        font-family: "Roboto";
-        color: rgb(137, 137, 137);
-        font-weight: bold;
-        text-transform: uppercase;
-        display: block;
-        margin-top: -20px;
-      }
-      /* 1000px  */
-      @media screen and (max-width: 1000px){
-        #main-header{
-          width:100%;
-        }
-        #container {
-          width: calc(100% - 90px);
-          padding: 45px;
-        }
-        #info {
-          width: 100%;
-          margin: 0px auto;
-        }
-        #nofloat {
-          width: 70%;
-        }
-        #floatleft {
-          width: 100%;
-        }
-        #floatright {
-          width: 100%;
-        }
-        #nofloat2 {
-          width: 100%;
-        }
-        #foreign-text{
-          width: calc(80% - 40px);
-          position: relative;
-          ;
-          padding: 20px;
-        }
-      }
-      /* 380px  */
-      @media screen and (max-width: 380px){
-        #main-header{
-          width:100%;
-        }
-        #foreign-text{
-          width: calc(80% - 40px);
-          position: relative;
-          ;
-          padding: 20px;
-        }
-        #container {
-          width: calc(100% - 60px);
-          padding: 30px;
-        }
-        #info {
-          width: 100%;
-          margin: 0px auto;
-        }
-        #nofloat {
-          width: 70%;
-        }
-        #floatleft {
-          width: 100%;
-        }
-        #floatright {
-          width: 100%;
-        }
-        #nofloat2 {
-          width: 100%;
-        }
-        #foreign-link a {
-          font-size: 12px;
-          padding: 15px;
-        }
-      }
-    </style>
-    <style id="filtersButtonsStyle">
-        .buttonActive {
-    background-color: #4CAF50; /* Green */
-    border: none;
-    color: white;
-    padding: 12px 24px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    -webkit-transition-duration: 0.4s; /* Safari */
-    transition-duration: 0.4s;
-    cursor: pointer;
-}
-</style>-->
     <!--<script id="genericFunctions" src="https://pub.s7.exacttarget.com/vhwqvkuaybh/vhwqvkuaybh"></script>-->
     <!--<script id="pcFunctions" src="https://pub.s7.exacttarget.com/pxlwkk10kcp/pxlwkk10kcp"></script>-->
     <!--<script src="C:\Users\GRI\Documents\GitHub\GRI-PC\[GENERIC] JS FUNCS.js"></script>-->
@@ -744,6 +321,8 @@
     <!--<script src="typer.js"></script>-->
 </head>
 <body>
+
+
             <div id="blockAmpscript" style="display:none;">
                 %%[
                 <div id="variableDeclaration">
@@ -916,6 +495,12 @@
                 </div>/*@All_Products_CSV*/
                 ]%%
             </div>
+            <div id="header">
+            <div id="main-header"></div>
+            </div>
+<div id="pre-container"><div id="container">
+
+
             <div class="">
                 <table>
                       <div id="testInterests" style="display:none;"></div>
@@ -940,18 +525,35 @@
                     <h2>Filters
                     </h2>
                     <table>
-                        <td class="filterTD"><label for="testSectorFilterLocation">Sectors</label>
-                            <div class="list" id="testSectorFilterLocation"></div>
+                      <td>
+                      <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#testSectorFilterLocation">Sector</button>
+                        <div class="collapse" id="testSectorFilterLocation">
+                            <!--<div class="list" id="testSectorFilterLocation"></div>-->
+                        </div>
                         </td>
-                        <td class="filterTD"> <label for="testRegionFilterLocation">Region</label>
-                            <div class="list" id="testRegionFilterLocation"></div>
-                        </td>
-                        <td class="filterTD"> <label for="testCountriesFilterLocation">Countries</label>
-                            <div class="list" id="testCountryFilterLocation"></div>
-                        </td>
-                        <td class="filterTD"> <label for="testSegmentFilterLocation">Segments</label>
-                            <div class="list" id="testSegmentFilterLocation"></div>
-                        </td>
+                        <td>
+                        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#testRegionFilterLocation">Region</button>
+                          <div class="collapse" id="testRegionFilterLocation">
+                              <!--<div class="list" id="testSectorFilterLocation"></div>-->
+                          </div>
+                          </td>
+                          <td>
+                          <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#testCountryFilterLocation">Country</button>
+                            <div class="collapse" id="testCountryFilterLocation">
+                                <!--<div class="list" id="testSectorFilterLocation"></div>-->
+                            </div>
+                            </td>
+                            <td>
+                            <button type="button" class="btn btn-info " data-toggle="collapse" data-target="#testSegmentFilterLocation">Segment</button>
+                              <div class="collapse" id="testSegmentFilterLocation">
+                                  <!--<div class="list" id="testSectorFilterLocation"></div>-->
+                              </div>
+                              </td>
+                              <td>
+                                <div>
+                                <label>Search:</label><br><input type="text" onkeyup="searchBox(this.value)">
+                              </div>
+                              </td>
                     </table>
                     <div style="display:none;">
                         <div id="activeSectorFiltersHere"></div>
@@ -969,16 +571,16 @@
                     </th>
                 </table>
             </div>
-            <label>Search:</label><br><input type="text" onkeyup="searchBox(this.value)">
 
-            <h2>Products:
-            </h2>
+
+            <h2>Products:</h2>
             <div id="debugPrints0">
             </div>
+          </div></div>
             <div id="allDEFields" style="display:none;">
                 1$$Argentina GRI$RealEstate$Latin America$None$Argentina$$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/529feaf5-e566-4ae6-b5db-6e3a3686626a.jpg$$;2$$Brazil GRI$RealEstate$Latin America$None$Brazil$$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/a79a3c56-7dd9-4a2a-b521-073156acf205.jpg$$;3$$Chile GRI$RealEstate$Latin America$None$Chile$$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/67dbd8a8-8f05-43bc-adbb-87cc8d2d63dc.jpg$$;4$$China LATAM Infrastructure Summit$Infrastructure$Asia$Latin America$Beijing$Brazil$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/5616a495-ced0-4fcb-b471-5a8c16d55e45.jpg$$;5$$Colombia GRI$RealEstate$Latin America$None$Colombia$$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/ee99a9c8-fab2-4ab1-b36e-22f895bce8b0.jpg$$;6$$Club Real Estate - Brazil$RealEstate$Latin America$None$Brazil$$All$GRI$true$none$inactive$1$$$$$$$$https://i.ytimg.com/vi/_2xDJphtn0w/maxresdefault.jpg$$;7$$Club Retail - Brazil$Retail$Latin America$None$Brazil$$All$GRI$true$none$inactive$1$$$$$$$$https://i.ytimg.com/vi/_2xDJphtn0w/maxresdefault.jpg$$;8$$Healthcare - Brazil$RealEstate$Latin America$None$Brazil$$Healthcare$GRI$false$none$inactive$1$$$$$$$$https://i.ytimg.com/vi/_2xDJphtn0w/maxresdefault.jpg$$;9$$Hotels - Brazil$RealEstate$Latin America$None$Brazil$$Hotels$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/82465b28-b79b-47a9-8619-536c81535cc0.jpg$$;10$$Industrial and Logistics - Brazil$RealEstate$Latin America$None$Brazil$$Logistics$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/3641fa3f-90d8-431f-b89e-92e42e9b48b5.jpg$$;11$$Infra Brazil GRI$Infrastructure$Latin America$None$Brazil$$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/f854ab90-bb19-491a-831c-34db6e4d10ef.jpg$$;12$$Infra Club Latam$Infrastructure$Latin America$None$Regional$$All$GRI$true$none$active$1$$$$$$$$https://i.ytimg.com/vi/_2xDJphtn0w/maxresdefault.jpg$$;13$$Infra Colombia$Infrastructure$Latin America$None$Colombia$$All$GRI$false$none$active$1$$$$$$$$https://i.ytimg.com/vi/_2xDJphtn0w/maxresdefault.jpg$$;14$$Infra Mexico GRI$Infrastructure$Latin America$None$Mexico$$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/c92206bd-192b-4c49-ac53-fd84cf7a6ebc.jpg$$;15$$Infra Peru GRI$Infrastructure$Latin America$None$Peru$$All$GRI$false$none$active$1$$$$$$$$https://i.ytimg.com/vi/_2xDJphtn0w/maxresdefault.jpg$$;16$$Land Development - Brazil$RealEstate$Latin America$None$Brazil$$Land Development$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/463ed6b6-8a9b-4357-b22b-a200ee402599.jpg$$;17$$LatAM GRI RE$RealEstate$Latin America$None$Regional$$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/6fb893a0-6dd9-4724-a25f-9e3cb0e78ff8.jpg$$;18$$Magazine Infra$Infrastructure$Latin America$None$Brazil$$Infrastructure$GRI$false$none$inactive$1$$$$$$$$https://i.ytimg.com/vi/_2xDJphtn0w/maxresdefault.jpg$$;19$$Magazine Real Estate Brazil$RealEstate$Latin America$None$Brazil$$All$GRI$false$none$inactive$1$$$$$$$$https://i.ytimg.com/vi/_2xDJphtn0w/maxresdefault.jpg$$;20$$Mexico GRI$RealEstate$Latin America$None$Mexico$$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/82f232d3-aa17-44d8-8ca0-f971fec2a8c8.jpg$$;21$$Office - Brazil$RealEstate$Latin America$None$Brazil$$Offices$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/bfc6707f-85fa-45d9-98a6-ead84dd16a67.jpg$$;22$$Peru GRI$RealEstate$Latin America$None$Peru$$All$GRI$false$none$active$1$$$$$$$$https://i.ytimg.com/vi/_2xDJphtn0w/maxresdefault.jpg$$;23$$PPPs and Concessions in Municipalities Brazil$Infrastructure$Latin America$None$Brazil$$PPPs$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/fda9e238-3e62-49a9-a2bb-6c5a9e3c69d1.jpg$$;24$$Residencial - Brazil$RealEstate$Latin America$None$Brazil$$Residential$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/bc4fed3a-336f-4ce0-9312-2a9b95bec5a3.jpg$$;25$$Retail - Brazil$Retail$Latin America$None$Brazil$$All$GRI$false$none$inactive$1$$$$$$$$https://i.ytimg.com/vi/_2xDJphtn0w/maxresdefault.jpg$$;26$$Shopping - Brazil$RealEstate$Latin America$None$Brazil$$Shopping$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/c2336047-5668-4237-9be4-3ea77b7d7f84.jpg$$;27$$Asia GRI$RealEstate$Asia$None$Regional$$All$GRI$false$none$active$1$$$$$$$$https://i.ytimg.com/vi/_2xDJphtn0w/maxresdefault.jpg$$;28$$China GRI$RealEstate$Asia$None$Beijing$$All$GRI$false$none$active$1$$$$$$$$https://i.ytimg.com/vi/_2xDJphtn0w/maxresdefault.jpg$$;29$$India GRI$RealEstate$Asia$None$Mumbai$$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/4ce2fb03-7fe1-47f8-983b-cad823c96d7a.jpg$$;30$$Infra Club India$Infrastructure$Asia$None$Mumbai$$All$GRI$true$none$active$1$$$$$$$$https://i.ytimg.com/vi/_2xDJphtn0w/maxresdefault.jpg$$;31$$Infra India GRI$Infrastructure$Asia$None$Mumbai$$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/aeef3575-1792-4263-9111-f9d8a8d388ac.jpg$$;32$$RE Club India$RealEstate$Asia$None$Mumbai$$All$GRI$true$none$active$1$$$$$$$$https://i.ytimg.com/vi/_2xDJphtn0w/maxresdefault.jpg$$;33$$British GRI$RealEstate$Europe$None$Paris$$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/27d59c95-1cbf-409c-9924-d5544f1fdb59.jpg$$;34$$CEE GRI$RealEstate$Europe$None$Regional$$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/cc055277-9e75-488b-8e66-d25b90b85f75.jpg$$;35$$Chairman Retreat$RealEstate$Europe$None$Switzerland$$All$GRI$true$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/66093275-25e8-46d8-9d42-3523c0e4b394.jpg$$;36$$Deutsche GRI$RealEstate$Europe$None$Germany$$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/1b6cb4b0-5e73-4bdf-9ded-9b291eadde9d.jpg$$;37$$Deutsche Logistik GRI$RealEstate$Europe$None$Germany$$Logistics$GRI$false$none$active$1$$$$$$$$https://i.ytimg.com/vi/_2xDJphtn0w/maxresdefault.jpg$$;38$$Deustche Wohnen GRI$RealEstate$Europe$None$Germany$$Residential$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/f10acdf4-fbfa-49e3-bfa1-52a71a550f3e.jpg$$;39$$Espana GRI$RealEstate$Europe$None$Madrid$$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/de5fee3a-245c-4eaa-91d6-6460f5f0d754.jpg$$;40$$Europe GRI$RealEstate$Europe$None$Regional$$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/19266cd0-0d93-4419-b172-781cdc32630b.jpg$$;41$$France GRI$RealEstate$Europe$None$Paris$$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/d62cabf9-a9dc-4f68-9d38-502f42292782.jpg$$;42$$GRI Club Real Estate - Europe$RealEstate$Europe$None$Regional$$All$GRI$true$none$active$1$$$$$$$$https://i.ytimg.com/vi/_2xDJphtn0w/maxresdefault.jpg$$;43$$Italia GRI$RealEstate$Europe$None$Milan$$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/d6ca95f8-2214-4b3c-a686-7a5d15e46f93.jpg$$;44$$Residential Europe GRI$RealEstate$Europe$None$Regional$$All$GRI$false$none$active$1$$$$$$$$https://i.ytimg.com/vi/_2xDJphtn0w/maxresdefault.jpg$$;45$$Russia GRI$RealEstate$Europe$None$Moscow$$All$GRI$false$none$active$1$$$$$$$$https://i.ytimg.com/vi/_2xDJphtn0w/maxresdefault.jpg$$;46$$Infra Latin America$Infrastructure$Latin America$None$Regional$$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/010c6b94-095a-4c7b-a68c-6cf7871f5ed9.jpg$$
             </div>
-    <div id="versionTrack">
+    <div id="versionTrack" style="display:none;">
         <i>Version: 0.0.18
         </i>
     </div>
