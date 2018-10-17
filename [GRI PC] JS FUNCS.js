@@ -88,7 +88,7 @@ function getFilters(filterType) {
 function createActiveButtons(filterType, activeArray) {
     let array = activeArray;
     let filter = filterType;
-    let filterButton, classOn, classOff, thisOptionId, functionOnClickString, currentId;
+    let filterButton, classOn, classOff, thisOptionId, functionOnClickString, currentId,text;
     let targetFilter = "active" + filterType + "ButtonFiltersHere";
     clearInnerHTML(targetFilter);
     classOn = "button" + filterType + "On";
@@ -101,7 +101,8 @@ function createActiveButtons(filterType, activeArray) {
         filterButton.setAttribute('class', "buttonActive");
         functionOnClickString = "filtersClass('" + thisOptionId + "','" + classOn + "','" + classOff + "','" + currentId + "'),getFilters('" + filterType + "','" + classOn + "','" + classOff + "')";
         filterButton.setAttribute('onclick', functionOnClickString);
-        filterButton.innerHTML = array[i];
+        text = (array[i]==="Latin America") ? "Latam":array[i]
+        filterButton.innerHTML = filterType+":"+text;
         document.getElementById(targetFilter).appendChild(filterButton);
     }
 }
@@ -163,11 +164,11 @@ function createFilterOption(matrix, targetPosition, arrayToMatch, filterType, cl
     let filterArray = arrayToMatch;
     if (filterArray.length) {
         let i = filterArray.length;
-        for (i; i--;) returnStuffy("OPTION", targetPosition, filterType, classON, classOFF, filterArray[i]);
+        for (i; i--;) returnStuffy( targetPosition, filterType, classON, classOFF, filterArray[i]);
     }
 }
 
-function returnStuffy(type, targetPosition, filterType, classOn, classOff, filterArray) {
+function returnStuffy(targetPosition, filterType, classOn, classOff, filterArray) {
     let thisId, filterOption, functionOnClickString, activeFilters, activeFilterLen, filterClass,jump;
     thisId = "OPTION" + filterType + filterArray;
     activeFilters = "active" + filterType + "FiltersHere";
@@ -206,6 +207,12 @@ function validateFilters(filterType, classesValueArray) {
             clearInnerHTML("activeRegionFiltersHere");
             clearInnerHTML("activeRegionButtonFiltersHere");
         }
+        //else if (classesValueArray.indexOf("Real Estate")<=0){
+          //filtersClass('OPTIONRegionEurope','buttonRegionOn','buttonRegionOff','activeButtonEurope'),getFilters('Region','buttonRegionOn','buttonRegionOff');
+
+/* THINK OF WAY OF REMOVING EUROPE IF SELECT RE INFRA EUROPE ASIA THEN REMOVES RE*/
+
+        //}
     }
     if ((filterType == "Region") && (classesValueArray == blank)) {
         clearInnerHTML("activeCountryFiltersHere");
