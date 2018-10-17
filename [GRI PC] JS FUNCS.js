@@ -1,6 +1,39 @@
 /* JAVASCRIPT FUNCTIONS LIBRARY FOR PREFERENCE CENTER */
 
-/* VERSION 0.0.19 | DATE 17-10-2018 */
+/* VERSION 0.0.20 | DATE 17-10-2018 */
+
+function initObj() {
+    var initialize = {
+        filterSectorOn: [],
+        filterRegionOn: [],
+        filterCountryOn: [],
+        filterSegmentOn: [],
+        productsSectorOn: [],
+        productsRegionOn: [],
+        productsCountryOn: [],
+        productsSegmentOn: [],
+        productsCommonSecReg: [],
+        productsCommonSecRegCon: [],
+        productsCommonSecRegConSeg: [],
+        productInterestLatinAmerica: [],
+        productInterestEurope: [],
+        productInterestAsia: [],
+        neo: [],
+        trinity: [],
+        subscribedProducts: []
+    };
+    return initialize;
+}
+function init(obj) {
+    console.log({obj});
+    obj.neo = doubleCSVtoMatrix('allDEFields', ';', '$');
+    obj.trinity = returnFieldifMatch(obj.neo, '2');
+    obj.subscribedProducts = csvToArray(document.getElementById('testInterests').innerHTML, ';');
+    console.log('%c Important Variables', 'color: #31e2d4;font-weight:bold;');
+    createProductBlocky(obj.neo, obj.trinity, 'debugPrints0');
+    createFilterOption(obj.neo, 'testSectorFilterLocation', arrayNoDups(returnFieldifMatch(obj.neo, '3', '12', 'active')), 'Sector', 'buttonSectorOff', 'buttonSectorOn', 'no');
+    createFilterOption(obj.neo, 'testRegionFilterLocation', arrayNoDups(returnFieldifMatch(obj.neo, '4', '12', 'active')), 'Region', 'buttonRegionOff', 'buttonRegionOn', 'no');
+}
 
 function createProductBlocky(matrix, wantedArray, targetLocationId) {
     let j, dynamicTD, dynamicLABEL, dynamicDIV, dynamicDIV2, dynamicINPUT, dynamicSPAN, dynamicSPAN2, dynamicIMAGE, toggleButtonFunction,count=0;
@@ -55,7 +88,7 @@ function createProductBlocky(matrix, wantedArray, targetLocationId) {
             dynamicDIV2.appendChild(dynamicSPAN);
             dynamicDIV2.appendChild(dynamicLABEL);
             dynamicDIV.appendChild(dynamicIMAGE);
-            (count === 8) ? (count = 0, document.getElementById(targetLocationId).appendChild(dynamicBR)) : false
+            (count === 5) ? (count = 0, document.getElementById(targetLocationId).appendChild(dynamicBR)) : false
             document.getElementById(targetLocationId).appendChild(dynamicTD);
             count++;
         }
@@ -102,17 +135,15 @@ function createActiveButtons(filterType, activeArray) {
         functionOnClickString = "filtersClass('" + thisOptionId + "','" + classOn + "','" + classOff + "','" + currentId + "'),getFilters('" + filterType + "','" + classOn + "','" + classOff + "')";
         filterButton.setAttribute('onclick', functionOnClickString);
         text = (array[i]==="Latin America") ? "Latam":array[i]
-        //filterButton.innerHTML = filterType+":"+text;
-        filterButton.innerHTML = array[i];
+        filterButton.innerHTML = filterType+":"+text;
+        //filterButton.innerHTML = array[i];
         document.getElementById(targetFilter).appendChild(filterButton);
     }
 }
 
 function createBlockys(filterType) {
 	let obj = preferenceCenterObject;
-    obj.productsCommonSecReg = arrayNoDups(arrayIntersec(obj.productsSectorOn, obj.productsRegionOn));
-    obj.productsCommonSecRegCon = arrayNoDups(arrayIntersec(obj.productsCommonSecReg, obj.productsCountryOn));
-    obj.productsCommonSecRegConSeg = arrayNoDups(arrayIntersec(obj.productsCommonSecRegCon, obj.productsSegmentOn));
+    refreshCommons(obj);
     console.log({obj});
     clearInnerHTML("debugPrints0");
     if ((obj.productsCommonSecRegConSeg.length) && (obj.filterSegmentOn != "")) {
@@ -128,18 +159,26 @@ function createBlockys(filterType) {
     } else {
         createProductBlocky(obj.neo, obj.trinity, 'debugPrints0');
     }
-    if (((filterType != "Country") && (filterType != "Segment")) && ((obj.filterRegionOn.length) || (obj.filterSectorOn.length))) {
-        createFiltersFunction(obj.neo, obj.productsCommonSecReg, 6, "Country");
-    }
-    if (filterType != "Segment") {
-        createFiltersFunction(obj.neo, obj.productsCommonSecRegCon, 8, "Segment");
-    }
-    if (filterType == "Region") {
-        createFiltersFunction(obj.neo, obj.productsRegionOn, 3, "Sector");
-    }
-    if (filterType == "Sector") {
-        createFiltersFunction(obj.neo, obj.productsSectorOn, 4, "Region");
-    }
+    filtersCheck(filterType,obj);
+}
+function refreshCommons(obj){
+  obj.productsCommonSecReg = arrayNoDups(arrayIntersec(obj.productsSectorOn, obj.productsRegionOn));
+  obj.productsCommonSecRegCon = arrayNoDups(arrayIntersec(obj.productsCommonSecReg, obj.productsCountryOn));
+  obj.productsCommonSecRegConSeg = arrayNoDups(arrayIntersec(obj.productsCommonSecRegCon, obj.productsSegmentOn));
+}
+function filtersCheck(filterType,obj){
+  if (((filterType != "Country") && (filterType != "Segment")) && ((obj.filterRegionOn.length) || (obj.filterSectorOn.length))) {
+      createFiltersFunction(obj.neo, obj.productsCommonSecReg, 6, "Country");
+  }
+  if (filterType != "Segment") {
+      createFiltersFunction(obj.neo, obj.productsCommonSecRegCon, 8, "Segment");
+  }
+  if (filterType == "Region") {
+      createFiltersFunction(obj.neo, obj.productsRegionOn, 3, "Sector");
+  }
+  if (filterType == "Sector") {
+      createFiltersFunction(obj.neo, obj.productsSectorOn, 4, "Region");
+  }
 }
 
 function createFiltersFunction(matrix, array, fieldToMatch, filterType) {
@@ -165,7 +204,7 @@ function createFilterOption(matrix, targetPosition, arrayToMatch, filterType, cl
     let filterArray = arrayToMatch;
     if (filterArray.length) {
         let i = filterArray.length;
-        for (i; i--;) returnStuffy( targetPosition, filterType, classON, classOFF, filterArray[i]);
+        for (i; i--;returnStuffy( targetPosition, filterType, classON, classOFF, filterArray[i])) {}
     }
 }
 
@@ -275,6 +314,7 @@ function refreshArrays(obj) {
     obj.productsCountryOn = [];
 
 }
+
 function searchBox(input) {
     const targetPosition = document.getElementById("debugPrints0");
     let toMatch = input.toUpperCase();
@@ -309,33 +349,31 @@ function sortBy(param) {
 
 
 function readyInterests() {
+	  let obj = preferenceCenterObject;
     let aux, i;
     let allInput = document.getElementById('interestsAll');
     let latamInput = document.getElementById('interestsLatam');
     let europeInput = document.getElementById('interestsEurope');
     let asiaInput = document.getElementById('interestsAsia');
-    let subProdLen = preferenceCenterObject.subscribedProducts.length;
-
+    let subProdLen = obj.subscribedProducts.length;
     for (i = subProdLen; i--;) {
-        aux = returnFieldifMatch(neo, 4, 2, preferenceCenterObject.subscribedProducts[i]);
-        if ((aux == "Latin America") && (preferenceCenterObject.productInterestLatinAmerica)) {
-            productInterestLatinAmerica.push(preferenceCenterObject.subscribedProducts[i]);
-        } else if ((aux == "Europe") && (preferenceCenterObject.productInterestEurope)) {
-            productInterestEurope.push(preferenceCenterObject.subscribedProducts[i]);
-        } else if ((aux == "Asia") && (preferenceCenterObject.productInterestAsia)) {
-            productInterestAsia.push(preferenceCenterObject.subscribedProducts[i]);
+        aux = returnFieldifMatch(obj.neo, 4, 2, obj.subscribedProducts[i]);
+        if ((aux == "Latin America") && (obj.productInterestLatinAmerica)) {
+            productInterestLatinAmerica.push(obj.subscribedProducts[i]);
+        } else if ((aux == "Europe") && (obj.productInterestEurope)) {
+            productInterestEurope.push(obj.subscribedProducts[i]);
+        } else if ((aux == "Asia") && (obj.productInterestAsia)) {
+            productInterestAsia.push(obj.subscribedProducts[i]);
         }
-        if (preferenceCenterObject.subscribedProducts[i] === "") {
-            removeFromArray(preferenceCenterObject.subscribedProducts, preferenceCenterObject.subscribedProducts[i]);
+        if (obj.subscribedProducts[i] === "") {
+            removeFromArray(obj.subscribedProducts, obj.subscribedProducts[i]);
         }
     }
-
-    allInput.value = arrayNoDups(preferenceCenterObject.subscribedProducts);
-    latamInput.value = changeParsers(arrayNoDups(preferenceCenterObject.productInterestLatinAmerica));
-    europeInput.value = changeParsers(arrayNoDups(preferenceCenterObject.productInterestEurope));
-    asiaInput.value = changeParsers(arrayNoDups(preferenceCenterObject.productInterestAsia));
+    allInput.value = arrayNoDups(obj.subscribedProducts);
+    latamInput.value = changeParsers(arrayNoDups(obj.productInterestLatinAmerica));
+    europeInput.value = changeParsers(arrayNoDups(obj.productInterestEurope));
+    asiaInput.value = changeParsers(arrayNoDups(obj.productInterestAsia));
 }
-
 
 function subscribedClass(productId, productClassOn, checkboxId) {
     let target = document.getElementById(checkboxId).classList;
@@ -376,7 +414,6 @@ function convertNametoNumber(filterType, updateValue) {
     return filterNumber;
 }
 
-
 function returnFieldifMatchArray(matrix, wantedField, filterType, classesValueArray,myObject) {
     let matchedArray1 = [];
     let conditionValues1 = csvToArray(document.getElementById('active' + filterType + 'FiltersHere').innerHTML, ',');
@@ -399,52 +436,4 @@ function returnFieldifMatchArray(matrix, wantedField, filterType, classesValueAr
     updateProducts(filterType, matchedArray1);
     createBlockys(filterType, preferenceCenterObject);
     return matchedArray1;
-}
-
-function doubleCSVtoMatrix(csvInputId, delim1, delim2) {
-    let array1 = csvToArray(document.getElementById(csvInputId).innerHTML, delim1);
-    let matrix = [];
-    for (let i = array1.length; i--;) matrix[i] = csvToArray(array1[i], delim2);
-    return matrix;
-}
-
-function returnFieldifMatch(matrix, wantedField, conditionField, conditionValue) {
-    let matchedArray = [];
-    for (let i = matrix.length; i--;)(matrix[i][conditionField] === conditionValue) ? matchedArray.push(matrix[i][wantedField]) : false
-    return matchedArray;
-}
-
-
-
-function initObj() {
-    var initialize = {
-        filterSectorOn: [],
-        filterRegionOn: [],
-        filterCountryOn: [],
-        filterSegmentOn: [],
-        productsSectorOn: [],
-        productsRegionOn: [],
-        productsCountryOn: [],
-        productsSegmentOn: [],
-        productsCommonSecReg: [],
-        productsCommonSecRegCon: [],
-        productsCommonSecRegConSeg: [],
-        productInterestLatinAmerica: [],
-        productInterestEurope: [],
-        productInterestAsia: [],
-        neo: [],
-        trinity: [],
-        subscribedProducts: []
-    };
-    return initialize;
-}
-function init(obj) {
-    console.log({obj});
-    obj.neo = doubleCSVtoMatrix('allDEFields', ';', '$');
-    obj.trinity = returnFieldifMatch(obj.neo, '2');
-    obj.subscribedProducts = csvToArray(document.getElementById('testInterests').innerHTML, ';');
-    console.log('%c Important Variables', 'color: #31e2d4;font-weight:bold;');
-    createProductBlocky(obj.neo, obj.trinity, 'debugPrints0');
-    createFilterOption(obj.neo, 'testSectorFilterLocation', arrayNoDups(returnFieldifMatch(obj.neo, '3', '12', 'active')), 'Sector', 'buttonSectorOff', 'buttonSectorOn', 'no');
-    createFilterOption(obj.neo, 'testRegionFilterLocation', arrayNoDups(returnFieldifMatch(obj.neo, '4', '12', 'active')), 'Region', 'buttonRegionOff', 'buttonRegionOn', 'no');
 }
