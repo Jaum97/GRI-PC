@@ -17,29 +17,24 @@
     <style id="test-style">
       .generic{
         border-style: dotted;
-        border-color: yellow;
+        border-color: cyan;
         vertical-align: top;
       }
       .generic table{
         border-style: dotted;
         border-color: green;
-        vertical-align: top;
       }
       }
       .generic td{
         border-style: dotted;
-        border-color: cyan;
-        vertical-align: top;
+        border-color: purple;
       }
       .generic div{
         border-style: dotted;
         border-color: blue;
-        vertical-align: top;
       }
       .generic button{
-        border-style: dotted;
         border-color: red;
-        vertical-align: top;
       }
     </style>
     <style id="filters-style">
@@ -49,12 +44,19 @@
         background-color: transparent;
         border-style: groove;
         border-color: black;
+        vertical-align: top;
       }
-
+      .btn-info{
+        vertical-align: top;
+      }
+      .collapsed{
+        vertical-align: top;
+      }
       .btn:hover{
         width:150px;
         max-width:150px;
         background-color: #9a9ba0;
+        vertical-align: top;
       }
       }
     </style>
@@ -499,30 +501,31 @@
                     </form>
                       </div>
                     <div>
-                    <table class="generic">
+                    <table>
+                      <tr>
                       <h3>Filters</h3>
                       <td class="generic">
                         <div id="searchBox">
                         <input type="text" placeholder="search" onkeyup="searchBox(this.value)">
                       </div>
                       </td>
-                      <td>
+                      <td class="generic">
                       <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#testSectorFilterLocation">Sector</button>
                         <div class="collapse" id="testSectorFilterLocation"></div>
                         </td>
-                        <td>
+                        <td class="generic">
                         <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#testRegionFilterLocation">Region</button>
                           <div class="collapse" id="testRegionFilterLocation"></div>
                           </td>
-                          <td>
+                          <td class="generic">
                           <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#testCountryFilterLocation">Country</button>
                             <div class="collapse" id="testCountryFilterLocation"></div>
                             </td>
-                            <td>
+                            <td class="generic">
                             <button type="button" class="btn btn-info " data-toggle="collapse" data-target="#testSegmentFilterLocation">Segment</button>
                               <div class="collapse" id="testSegmentFilterLocation"></div>
                               </td>
-                              <td>
+                              <td class="generic">
                               <button type="button" class="btn btn-info " data-toggle="collapse" data-target="#sortByLocation">Subscription</button>
                                 <div class="collapse" id="sortByLocation">
                                   <button class="generic" onclick="sortBy('all')"> all </button><br>
@@ -530,7 +533,10 @@
                                   <button class="generic" onclick="sortBy('notsubscribed')">not subscribed </button><br>
                                 </div>
                                 </td>
+                              </tr>
                     </table>
+
+
 
                     <table>
                       <td class="generic">
