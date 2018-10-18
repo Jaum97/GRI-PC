@@ -2,630 +2,524 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <link href="//www.griclub.org/apple-touch-icon-180x180.png" rel="icon" />
-    <title>GRI Preference Center</title>
-    <!--<meta name="description" content="">-->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-      <!--<script id="genericFunctions" src="https://pub.s7.exacttarget.com/vhwqvkuaybh/vhwqvkuaybh"></script>-->
-      <!--<script id="pcFunctions" src="https://pub.s7.exacttarget.com/pxlwkk10kcp/pxlwkk10kcp"></script>-->
-      <script src="[GENERIC] JS FUNCS.js"></script>
-      <script src="[GRI PC] JS FUNCS.js"></script>
-    <style id="test-style">
-      .generic{
-        border-style: dotted;
-        border-color: cyan;
-        vertical-align: top;
-      }
-      .generic table{
-        border-style: dotted;
-        border-color: green;
-      }
-      }
-      .generic td{
-        border-style: dotted;
-        border-color: purple;
-      }
-      .generic div{
-        border-style: dotted;
-        border-color: blue;
-      }
-      .generic button{
-        border-color: red;
-      }
-    </style>
-    <style id="navbar-style">
-        body {
-        margin: 0;
-        font-size: 28px;
-        font-family: Arial, Helvetica, sans-serif;
-        }
-
-        .header {
-        background-color: #f1f1f1;
-        padding: 30px;
-        text-align: center;
-        }
-
-        #navbar {
-        overflow: hidden;
-        background-color: #333;
-        }
-
-        #navbar a {
-        float: left;
-        display: block;
-        color: #f2f2f2;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-        font-size: 17px;
-        }
-
-        #navbar a:hover {
-        background-color: #ddd;
-        color: black;
-        }
-
-        #navbar a.active {
-        background-color: #4CAF50;
-        color: white;
-        }
-
-        .content {
-        padding: 16px;
-        }
-
-        .sticky {
-        position: fixed;
-        top: 0;
-        width: 100%;
-        }
-
-        .sticky + .content {
-        padding-top: 60px;
-        }
-    </style>
-    <style id="filters-style">
-      .btn{
-        width:150px;
-        max-width:150px;
-        background-color: transparent;
-        border-style: groove;
-        border-color: black;
-        vertical-align: top;
-      }
-      .btn-info{
-        vertical-align: top;
-      }
-      .collapsed{
-        vertical-align: top;
-      }
-      .btn:hover{
-        width:150px;
-        max-width:150px;
-        background-color: #9a9ba0;
-        vertical-align: top;
-      }
-      }
-    </style>
-    <style id="body-style">
-        body{
-          background: #576982;
-          font-size: 14px;
-          font-family: 'Roboto', sans-serif;
-          margin: 0px;
-        }
-        /* Formatting */
-        i, em {
-          font-style: italic;
-        }
-        b, strong {
-          color: #e9702e;
-        }
-        a {
-          text-decoration: none;
-          -webkit-transition:All 0.3s ease-in-out;
-          -moz-transition:All 0.3s ease-in-out;
-          -o-transition:All 0.3s ease-in-out;
-        }
-        a:hover, a:active {
-          text-decoration: none;
-          -webkit-transition:All 0.3s ease-in-out;
-          -moz-transition:All 0.3s ease-in-out;
-          -o-transition:All 0.3s ease-in-out;
-        }
-        /* Header Bar */
-        #header{
-          width: calc(100% - 20px);
-          float:left;
-          padding: 15px;
-          background: #111d2d;
-          display: block;
-          height: 50px;
-        }
-        /* Calling GRI Logo */
-        #main-header{
-          width:800px;
-          position: relative;
-          display: block;
-          margin: 0px auto;
-          height: 30px;
-          background: url('http://www.griclub.org/uploads/arquivo/griclub.svg')no-repeat right center;
-        }
-        /* Container */
-        #pre-container {
-          width: 100%;
-          height: auto;
-          position: relative;
-          float: left;
-        }
-        #container {
-          width: calc(1200px - 120px);
-          position: relative;
-          margin: 0px auto;
-          padding: 60px;
-          background: #c5c8cc;
-          font-family: Roboto;
-          color: #0a0908;
-          font-size: 16px;
-          line-height: 1.875;
-          text-align: justify;
-        }
-      </style>
-    <style id="filterButtonsOn-style">
-        .buttonActive{
-      height: 30px;
-      width: 200px;
-      max-width: 150px;
-      max-height: 75px;
-      border: 2px solid black;
-      background-color: light-gray;
-      text-align: center;
-      }
-      .buttonActive:hover{
-      height: 30px;
-      width: 200px;
-      max-width: 150px;
-      max-height: 75px;
-      border: 2px solid black;
-      background-color: light-gray;
-      text-align: center;
-      }
-    </style>
-    <style id="filterOptions-style">
-        .buttonSectorOn{
-
-        display:none;
-        width:150px;
-        max-width:150px;
-        vertical-align: bottom;
-      }
-      .buttonSectorOff{
-        border-style:solid;
-        width:150px;
-        max-width:150px;
-        vertical-align: top;
-      }
-      .buttonRegionOn{
-        border-style:solid;
-        display:none;
-        width:150px;
-        max-width:150px;
-        height: 0px;
-      }
-      .buttonRegionOff{
-        border-style:solid;
-        width:150px;
-        max-width:150px;
-      }
-      .buttonCountryOn{
-        border-style:solid;
-        display:none;
-        width:150px;
-        max-width:150px;
-        height: 0px;
-      }
-      .buttonCountryOff{
-        border-style:solid;
-        width:150px;
-        max-width:150px;
-      }
-      .buttonSegmentOn{
-        width:150px;
-        display:none;
-        max-width:150px;
-        height: 0px;
-      }
-      .buttonSegmentOff{
-        border-style:solid;
-        width:150px;
-        max-width:150px;
-      }
-      .subscribedOn{
-        width:150px;
-        max-width:150px;
-      }
-      .testClass{
-        font-size:12px;
-        display:block;
-        border-style:solid;
-        width:220px;
-        max-width:220px;
-      }
-      .testImageClass{
-        width:220px;
-        max-width:220px;
-      }
-      .posFixed{
-       position:fixed;
-       float: right;
-       right:100px;
-       text-align: left;
-      }
-    </style>
-    <style id="toggleButtons-style">
-        .switch {
-        position: relative;
-        display: inline-block;
-        width: 120px;
-        height: 34px;
-      }
-      .switch input {
-        display:none;
-      }
-      .slider {
-        position: absolute;
-        cursor: pointer;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: #e8352c;
-        -webkit-transition: .4s;
-        transition: .4s;
-      }
-      .slider:before {
-        position: absolute;
-        content: "";
-        height: 26px;
-        width: 26px;
-        left: 4px;
-        bottom: 4px;
-        background-color: white;
-        -webkit-transition: .5s;
-        transition: .5s;
-      }
-      input:checked + .slider {
-        background-color: #2ce861;
-      }
-      input:focus + .slider {
-        box-shadow: 0 0 1px #2ce861;
-      }
-      input:checked + .slider:before {
-        -webkit-transform: translateX(86px);
-        -ms-transform: translateX(86px);
-        transform: translateX(86px);
-      }
-      /* Rounded sliders */
-      .slider.round {
-        border-radius: 34px;
-      }
-      .slider.round:before {
-        border-radius: 50%;
-      }
-    </style>
-    <style id="bouncyeffect-style">
-        @keyframes bounce {
-        0%, 100%, 20%, 50%, 80% {
-          -webkit-transform: translateY(0);
-          -ms-transform:     translateY(0);
-          transform:         translateY(0)
-        }
-        40% {
-          -webkit-transform: translateY(-20px);
-          -ms-transform:     translateY(-20px);
-          transform:         translateY(-20px)
-        }
-        60% {
-          -webkit-transform: translateY(-10px);
-          -ms-transform:     translateY(-10px);
-          transform:         translateY(-10px)
-        }
-      }
-      .bouncyClass {
-        width:220px;
-        max-width:220px;
-        -webkit-animation-duration: 1s;
-        animation-duration: 1s;
-        -webkit-animation-fill-mode: both;
-        animation-fill-mode: both;
-        -webkit-animation-timing-function: ease-in-out;
-        animation-timing-function: ease-in-out;
-        animation-iteration-count: infinite;
-        -webkit-animation-iteration-count: infinite;
-        background-color: white;
-      }
-      .bouncyClass:hover {
-        cursor: pointer;
-        color:#276af9;
-        animation-name: bounce;
-        -moz-animation-name: bounce;
-      }
-    </style>
-
+  <meta charset="utf-8">
+  <link href="//www.griclub.org/apple-touch-icon-180x180.png" rel="icon" />
+  <title>GRI Preference Center</title>
+  <!--<meta name="description" content="">-->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <!--<script id="genericFunctions" src="https://pub.s7.exacttarget.com/vhwqvkuaybh/vhwqvkuaybh"></script>-->
+  <!--<script id="pcFunctions" src="https://pub.s7.exacttarget.com/pxlwkk10kcp/pxlwkk10kcp"></script>-->
+  <script src="[GENERIC] JS FUNCS.js"></script>
+  <script src="[GRI PC] JS FUNCS.js"></script>
+  <style id="test-style">
+  .generic{
+    border-style: dotted;
+    border-color: cyan;
+    vertical-align: top;
+  }
+  table.generic{
+    border-style: dotted;
+    border-color: green;
+  }
+  td.generic{
+    border-style: dotted;
+    border-color: purple;
+  }
+  div.generic {
+    border-style: dotted;
+    border-color: blue;
+  }
+  button.generic {
+    border-color: red;
+  }
+  </style>
+  <style id="filters-style">
+  .btn{
+    width:150px;
+    max-width:150px;
+    background-color: transparent;
+    border-style: groove;
+    border-color: black;
+    vertical-align: top;
+  }
+  .btn-info{
+    vertical-align: top;
+  }
+  .collapsed{
+    vertical-align: top;
+  }
+  .btn:hover{
+    width:150px;
+    max-width:150px;
+    background-color: #9a9ba0;
+    vertical-align: top;
+  }
+  .subscribtionButtons{
+    border-style:solid;
+    width:150px;
+    max-width:150px;
+    vertical-align: top;
+  }
+</style>
+  <style id="body-style">
+                    body{
+                      background: grey;
+                      font-size: 14px;
+                      font-family: 'Comic Sans MS', sans-serif;
+                      margin: 0px;
+                    }
+                    /* Formatting */
+                    i, em {
+                      font-style: italic;
+                    }
+                    b, strong {
+                      color: #e9702e;
+                    }
+                    a {
+                      text-decoration: none;
+                      -webkit-transition:All 0.3s ease-in-out;
+                      -moz-transition:All 0.3s ease-in-out;
+                      -o-transition:All 0.3s ease-in-out;
+                    }
+                    a:hover, a:active {
+                      text-decoration: none;
+                      -webkit-transition:All 0.3s ease-in-out;
+                      -moz-transition:All 0.3s ease-in-out;
+                      -o-transition:All 0.3s ease-in-out;
+                    }
+            </style>
+  <style id="filterButtonsOn-style">
+                .buttonActive{
+                  height: 30px;
+                  width: 200px;
+                  max-width: 150px;
+                  max-height: 75px;
+                  border: 2px solid black;
+                  background-color: light-gray;
+                  text-align: center;
+                }
+                .buttonActive:hover{
+                  height: 30px;
+                  width: 200px;
+                  max-width: 150px;
+                  max-height: 75px;
+                  border: 2px solid black;
+                  background-color: light-gray;
+                  text-align: center;
+                }
+            </style>
+  <style id="filterOptions-style">
+              .buttonSectorOn{
+                display:none;
+                width:150px;
+                max-width:150px;
+                vertical-align: bottom;
+              }
+              .buttonSectorOff{
+                border-style:solid;
+                width:150px;
+                max-width:150px;
+                vertical-align: top;
+              }
+              .buttonRegionOn{
+                border-style:solid;
+                display:none;
+                width:150px;
+                max-width:150px;
+                height: 0px;
+              }
+              .buttonRegionOff{
+                border-style:solid;
+                width:150px;
+                max-width:150px;
+              }
+              .buttonCountryOn{
+                border-style:solid;
+                display:none;
+                width:150px;
+                max-width:150px;
+                height: 0px;
+              }
+              .buttonCountryOff{
+                border-style:solid;
+                width:150px;
+                max-width:150px;
+              }
+              .buttonSegmentOn{
+                width:150px;
+                display:none;
+                max-width:150px;
+                height: 0px;
+              }
+              .buttonSegmentOff{
+                border-style:solid;
+                width:150px;
+                max-width:150px;
+              }
+              .subscribedOn{
+                width:150px;
+                max-width:150px;
+              }
+              .testClass{
+                font-size:12px;
+                display:block;
+                border-style:solid;
+                width:220px;
+                max-width:220px;
+              }
+              .testImageClass{
+                width:220px;
+                max-width:220px;
+              }
+              .posFixed{
+                position:fixed;
+                float: right;
+                right:100px;
+                text-align: left;
+              }
+            </style>
+  <style id="toggleButtons-style">
+              .switch {
+                position: relative;
+                display: inline-block;
+                width: 120px;
+                height: 34px;
+              }
+              .switch input {
+                display:none;
+              }
+              .slider {
+                position: absolute;
+                cursor: pointer;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: #e8352c;
+                -webkit-transition: .4s;
+                transition: .4s;
+              }
+              .slider:before {
+                position: absolute;
+                content: "";
+                height: 26px;
+                width: 26px;
+                left: 4px;
+                bottom: 4px;
+                background-color: white;
+                -webkit-transition: .5s;
+                transition: .5s;
+              }
+              input:checked + .slider {
+                background-color: #2ce861;
+              }
+              input:focus + .slider {
+                box-shadow: 0 0 1px #2ce861;
+              }
+              input:checked + .slider:before {
+                -webkit-transform: translateX(86px);
+                -ms-transform: translateX(86px);
+                transform: translateX(86px);
+              }
+              /* Rounded sliders */
+              .slider.round {
+                border-radius: 34px;
+              }
+              .slider.round:before {
+                border-radius: 50%;
+              }
+            </style>
+  <style id="bouncyeffect-style">
+                @keyframes bounce {
+                  0%, 100%, 20%, 50%, 80% {
+                    -webkit-transform: translateY(0);
+                    -ms-transform:     translateY(0);
+                    transform:         translateY(0)
+                  }
+                  40% {
+                    -webkit-transform: translateY(-20px);
+                    -ms-transform:     translateY(-20px);
+                    transform:         translateY(-20px)
+                  }
+                  60% {
+                    -webkit-transform: translateY(-10px);
+                    -ms-transform:     translateY(-10px);
+                    transform:         translateY(-10px)
+                  }
+                }
+                .bouncyClass {
+                  width:220px;
+                  max-width:220px;
+                  -webkit-animation-duration: 1s;
+                  animation-duration: 1s;
+                  -webkit-animation-fill-mode: both;
+                  animation-fill-mode: both;
+                  -webkit-animation-timing-function: ease-in-out;
+                  animation-timing-function: ease-in-out;
+                  animation-iteration-count: infinite;
+                  -webkit-animation-iteration-count: infinite;
+                  background-color: white;
+                }
+                .bouncyClass:hover {
+                  cursor: pointer;
+                  color:#276af9;
+                  animation-name: bounce;
+                  -moz-animation-name: bounce;
+                }
+            </style>
 </head>
 <body>
-  <div id="navbar">
-    <a class="active" href="javascript:void(0)">Home</a>
-  </div>
   <div class="content">
-            <div id="blockAmpscript" style="display:none;">
-                %%[
-                <div id="variableDeclaration">
-                    SET @ContactEmail = RequestParameter('ContactEmail')
-                    SET @Contact_DE = 'Contact_Salesforce'
-                    SET @Lead_DE = 'Lead_Salesforce'
-                    SET @Aux_DE = 'New_PC_Auxiliar_DE'
-                    SET @Products_DE = 'PC_GRI_Products_DE'
-                </div>
-                <div>
-                    /*CHECK EMAIL IN AUX DE*/
-                    SET @Check_Contact_Aux_DE_Rows = LookupRows( @Aux_DE, 'Contact-Email' , @ContactEmail )
-                    SET @Check_Contact_Aux_DE_CountRows = RowCount( @Check_Contact_Aux_DE_Rows )
+    <div id="blockAmpscript" style="display:none;">
+      %%[
+      <div id="variableDeclaration">
+        SET @ContactEmail = RequestParameter('ContactEmail')
+        SET @Contact_DE = 'Contact_Salesforce'
+        SET @Lead_DE = 'Lead_Salesforce'
+        SET @Aux_DE = 'New_PC_Auxiliar_DE'
+        SET @Products_DE = 'PC_GRI_Products_DE'
+      </div>
+      <div>
+        /*CHECK EMAIL IN AUX DE*/
+        SET @Check_Contact_Aux_DE_Rows = LookupRows( @Aux_DE, 'Contact-Email' , @ContactEmail )
+        SET @Check_Contact_Aux_DE_CountRows = RowCount( @Check_Contact_Aux_DE_Rows )
 
-                    /*CHECK EMAIL IN SYNC CONTACT DE*/
-                    SET @Check_Contact_Sync_DE_Rows = LookupRows( @Contact_DE , 'Email' , @ContactEmail )
-                    SET @Check_Contact_Sync_DE_CountRows = RowCount( @Check_Contact_Sync_DE_Rows )
+        /*CHECK EMAIL IN SYNC CONTACT DE*/
+        SET @Check_Contact_Sync_DE_Rows = LookupRows( @Contact_DE , 'Email' , @ContactEmail )
+        SET @Check_Contact_Sync_DE_CountRows = RowCount( @Check_Contact_Sync_DE_Rows )
 
-                    /*CHECK EMAIL IN SYNC LEAD DE*/
-                    SET @Check_Contact_Lead_DE_Rows = LookupRows( @Lead_DE , 'Email' , @ContactEmail )
-                    SET @Check_Contact_Lead_DE_CountRows = RowCount( @Check_Contact_Lead_DE_Rows )
-                    /*RETRIEVE INTERESTS*/
+        /*CHECK EMAIL IN SYNC LEAD DE*/
+        SET @Check_Contact_Lead_DE_Rows = LookupRows( @Lead_DE , 'Email' , @ContactEmail )
+        SET @Check_Contact_Lead_DE_CountRows = RowCount( @Check_Contact_Lead_DE_Rows )
+        /*RETRIEVE INTERESTS*/
 
-                    IF @Check_Contact_Aux_DE_CountRows >= 1 THEN
+        IF @Check_Contact_Aux_DE_CountRows >= 1 THEN
 
-                    /*CONTACT EXISTS IN AUX DE*/
+        /*CONTACT EXISTS IN AUX DE*/
 
-                    SET @ContactID = LookUp(@Aux_DE , 'Contact-ID' , 'Contact-Email' ,@ContactEmail)
+        SET @ContactID = LookUp(@Aux_DE , 'Contact-ID' , 'Contact-Email' ,@ContactEmail)
 
-                    SET @ContactInterestLatinAmerica = LookUp(@Aux_DE , 'Contact-Interest-Latam' , 'Contact-Email' ,@ContactEmail)
-                    SET @ContactInterestEurope = LookUp(@Aux_DE , 'Contact-Interest-Europe' , 'Contact-Email' , @ContactEmail)
-                    SET @ContactInterestAsia = LookUp(@Aux_DE , 'Contact-Interest-Asia' , 'Contact-Email' , @ContactEmail)
-                    SET @AuxContact = true
-                    /*SET @EmailOptOut = LookUp(@Aux_DE , 'Email_Opt_Out' , 'Contact-Email' , @ContactEmail)*/
-                    /*SET @EmailOptOutTime = LookUp(@Aux_DE , 'Contact_Opt_Out_Time' , 'Contact-Email' , @ContactEmail)*/
-
-
-                    ELSEIF @Check_Contact_Sync_DE_CountRows >= 1 THEN
-
-                    /*CONTACT EXISTS IN SYNC CONTACT DE*/
-
-                    SET @ContactInterestLatinAmerica = LookUp(@Contact_DE , 'Product_of_interest_South_America__c' , 'Email' ,@ContactEmail)
-                    SET @ContactInterestEurope = LookUp(@Contact_DE , 'Product_of_interest_Europe__c' , 'Email' , @ContactEmail)
-                    SET @ContactInterestAsia = LookUp(@Contact_DE , 'Product_of_interest_Asia__c' , 'Email' , @ContactEmail)
-                    SET @EmailOptOut = LookUp(@Contact_DE , 'HasOptedOutOfEmail' , 'Email' , @ContactEmail)
-                    SET @GDPRFullConsent = LookUp(@Contact_DE , 'Consent_Given_to_GDPR__c' , 'Email' , @ContactEmail)
-                    SET @ContactID = LookUp(@Contact_DE , 'Id' , 'Email' , @ContactEmail)
-
-                    ELSEIF @Check_Contact_Lead_DE_CountRows >= 1 THEN
-
-                    /*CONTACT EXISTS IN LEAD DE*/
-
-                    SET @ContactInterestLatinAmerica = LookUp(@Lead_DE , 'Product_of_Interest_Latin_America__c' , 'Email' ,@ContactEmail)
-                    SET @ContactInterestEurope = LookUp(@Lead_DE , 'Product_of_Interest_Europe__c' , 'Email' , @ContactEmail)
-                    SET @ContactInterestAsia = LookUp(@Lead_DE , 'Product_of_Interest_Asia__c' , 'Email' , @ContactEmail)
-                    SET @EmailOptOut = LookUp(@Lead_DE , 'HasOptedOutOfEmail' , 'Email' , @ContactEmail)
-
-                    ELSE
-                    SET @NewContact = "true"
-                    /*Output(concat('New Contact'))*/
-                    ENDIF
-                </div>
-                <div id="allProductsToCSV">
-                    /*---------------------------ALL PRODUCTS-------------------------*/
-                    VAR @allProductsIndex,@allProductsCSV
-                    SET @allProductRows = LookupRows( @Products_DE , "Product_Default" , "1" )
-                    SET @allRowsCount = RowCount(@allProductRows)
-                    IF NOT EMPTY(@allRowsCount) THEN
-                    FOR @allProductsIndex = 1 to @allRowsCount DO
-                    SET @allProductsCurrentRow = Row(@allProductRows,@allProductsIndex)
-                    SET @currentProductName = Field(@allProductsCurrentRow, "Product_Name")
-                    IF @allProductsIndex == 1 THEN
-                    SET @allProductsCSV = concat(@allProductsCSV,@currentProductName)
-                    ELSE
-                    SET @allProductsCSV = concat(@allProductsCSV,';',@currentProductName)
-                    ENDIF
-                    NEXT @allProductsIndex
-                    ENDIF
-                </div>/*@allProductsCSV*/
-                <div id="allProductsFieldsCSV">
-                    /*---------------------------ALL PRODUCTS-------------------------*/
-                    VAR @allProductsFieldsIndex,@allProductsFieldsCSV
-                    SET @allProductsFieldsRows = LookupRows( @Products_DE , "Product_Default" , "1" )
-                    SET @allProductsFieldsRowsCount = RowCount(@allProductsFieldsRows)
-                    IF NOT EMPTY(@allProductsFieldsRowsCount) THEN
-                    FOR @allProductsFieldsIndex = 1 to @allProductsFieldsRowsCount DO
-                    SET @allProductsFieldsCurrentRow = Row(@allProductsFieldsRows,@allProductsFieldsIndex)
-                    SET @currentProductId = Field(@allProductsFieldsCurrentRow, "Product_ID")
-                    IF @allProductsFieldsIndex == 1 THEN
-                    SET @allProductsFieldsCSV = concat(@allProductsFieldsCSV,@currentProductId)
-                    ELSE
-                    SET @allProductsFieldsCSV = concat(@allProductsFieldsCSV,';',@currentProductId)
-                    ENDIF
-                    SET @currentProductSFID = Field(@allProductsFieldsCurrentRow, "Product_SF_ID")
-                    SET @currentProductName = Field(@allProductsFieldsCurrentRow, "Product_Name")
-                    SET @currentProductSector = Field(@allProductsFieldsCurrentRow, "Product_Sector")
-                    SET @currentProductRegion1 = Field(@allProductsFieldsCurrentRow, "Product_Region_1")
-                    SET @currentProductRegion2 = Field(@allProductsFieldsCurrentRow, "Product_Region_2")
-                    SET @currentProductCountry1 = Field(@allProductsFieldsCurrentRow, "Product_Country_1")
-                    SET @currentProductCountry2 = Field(@allProductsFieldsCurrentRow, "Product_Country_2")
-                    SET @currentProductSpeciality = Field(@allProductsFieldsCurrentRow, "Product_Speciality")
-                    SET @currentProductCompany = Field(@allProductsFieldsCurrentRow, "Product_Company")
-                    SET @currentProductClub = Field(@allProductsFieldsCurrentRow, "Product_Club")
-                    SET @currentProductClubName = Field(@allProductsFieldsCurrentRow, "Product_Club_Name")
-                    SET @currentProductStatus = Field(@allProductsFieldsCurrentRow, "Product_Status")
-                    SET @currentProductDefault = Field(@allProductsFieldsCurrentRow, "Product_Default")
-                    SET @currentProductPhone = Field(@allProductsFieldsCurrentRow, "Product_Phone")
-                    SET @currentProductEmail = Field(@allProductsFieldsCurrentRow, "Product_Email")
-                    SET @currentProductAddress = Field(@allProductsFieldsCurrentRow, "Product_Address")
-                    SET @currentProductResponsible1 = Field(@allProductsFieldsCurrentRow, "Product_Responsible_1")
-                    SET @currentProductResponsible2 = Field(@allProductsFieldsCurrentRow, "Product_Responsible_2")
-                    SET @currentProductURL_1 = Field(@allProductsFieldsCurrentRow, "Product_URL_1")
-                    SET @currentProductURL_2 = Field(@allProductsFieldsCurrentRow, "Product_URL_2")
-                    SET @currentProductIMGSource1 = Field(@allProductsFieldsCurrentRow, "Product_IMG_Source_1")
-                    SET @currentProductIMGSource2 = Field(@allProductsFieldsCurrentRow, "Product_IMG_Source_2")
-                    SET @allProductsFieldsCSV = concat(
-                    @allProductsFieldsCSV,'$',
-                    @currentProductSFID,'$',
-                    @currentProductName,'$',
-                    @currentProductSector,'$',
-                    @currentProductRegion1,'$',
-                    @currentProductRegion2,'$',
-                    @currentProductCountry1,'$',
-                    @currentProductCountry2,'$',
-                    @currentProductSpeciality,'$',
-                    @currentProductCompany,'$',
-                    @currentProductClub,'$',
-                    @currentProductClubName,'$',
-                    @currentProductStatus,'$',
-                    @currentProductDefault,'$',
-                    @currentProductPhone,'$',
-                    @currentProductEmail,'$',
-                    @currentProductAddress,'$',
-                    @currentProductResponsible1,'$',
-                    @currentProductResponsible2,'$',
-                    @currentProductURL_1,'$',
-                    @currentProductURL_2,'$',
-                    @currentProductIMGSource1,'$',
-                    @currentProductIMGSource2,'$'
-                    )
-                    NEXT @allProductsFieldsIndex
-                    ENDIF
-                </div>
-                <div>
-                    VAR @allInterests
-
-                    IF NOT EMPTY (@allInterests) THEN
-                    IF NOT EMPTY (@ContactInterestLatinAmerica) THEN
-                    SET @allInterests = concat(@allInterests,';',@ContactInterestLatinAmerica)
-                    ENDIF
-                    ELSE
-                    SET @allInterests = @ContactInterestLatinAmerica
-                    ENDIF
-                    IF NOT EMPTY (@allInterests) THEN
-                    IF NOT EMPTY (@ContactInterestEurope) THEN
-                    SET @allInterests = concat(@allInterests,';',@ContactInterestEurope)
-                    ENDIF
-                    ELSE
-                    SET @allInterests = @ContactInterestEurope
-                    ENDIF
-                    IF NOT EMPTY (@allInterests) THEN
-                    IF NOT EMPTY (@ContactInterestAsia) THEN
-                    SET @allInterests = concat(@allInterests,';',@ContactInterestAsia)
-                    ENDIF
-                    ELSE
-                    SET @allInterests = @ContactInterestAsia
-                    ENDIF
-
-                    /*NEXT @All_Products_Index*/
-                </div>/*@All_Products_CSV*/
-                ]%%
-            </div>
-            <div id="allDEFields" style="display:none;">
-                1$$Argentina GRI$RealEstate$Latin America$None$Argentina$$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/529feaf5-e566-4ae6-b5db-6e3a3686626a.jpg$$;2$$Brazil GRI$RealEstate$Latin America$None$Brazil$$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/a79a3c56-7dd9-4a2a-b521-073156acf205.jpg$$;3$$Chile GRI$RealEstate$Latin America$None$Chile$$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/67dbd8a8-8f05-43bc-adbb-87cc8d2d63dc.jpg$$;4$$China LATAM Infrastructure Summit$Infrastructure$Asia$Latin America$Beijing$Brazil$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/5616a495-ced0-4fcb-b471-5a8c16d55e45.jpg$$;5$$Colombia GRI$RealEstate$Latin America$None$Colombia$$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/ee99a9c8-fab2-4ab1-b36e-22f895bce8b0.jpg$$;6$$Club Real Estate - Brazil$RealEstate$Latin America$None$Brazil$$All$GRI$true$none$inactive$1$$$$$$$$https://i.ytimg.com/vi/_2xDJphtn0w/maxresdefault.jpg$$;7$$Club Retail - Brazil$Retail$Latin America$None$Brazil$$All$GRI$true$none$inactive$1$$$$$$$$https://i.ytimg.com/vi/_2xDJphtn0w/maxresdefault.jpg$$;8$$Healthcare - Brazil$RealEstate$Latin America$None$Brazil$$Healthcare$GRI$false$none$inactive$1$$$$$$$$https://i.ytimg.com/vi/_2xDJphtn0w/maxresdefault.jpg$$;9$$Hotels - Brazil$RealEstate$Latin America$None$Brazil$$Hotels$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/82465b28-b79b-47a9-8619-536c81535cc0.jpg$$;10$$Industrial and Logistics - Brazil$RealEstate$Latin America$None$Brazil$$Logistics$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/3641fa3f-90d8-431f-b89e-92e42e9b48b5.jpg$$;11$$Infra Brazil GRI$Infrastructure$Latin America$None$Brazil$$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/f854ab90-bb19-491a-831c-34db6e4d10ef.jpg$$;12$$Infra Club Latam$Infrastructure$Latin America$None$Regional$$All$GRI$true$none$active$1$$$$$$$$https://i.ytimg.com/vi/_2xDJphtn0w/maxresdefault.jpg$$;13$$Infra Colombia$Infrastructure$Latin America$None$Colombia$$All$GRI$false$none$active$1$$$$$$$$https://i.ytimg.com/vi/_2xDJphtn0w/maxresdefault.jpg$$;14$$Infra Mexico GRI$Infrastructure$Latin America$None$Mexico$$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/c92206bd-192b-4c49-ac53-fd84cf7a6ebc.jpg$$;15$$Infra Peru GRI$Infrastructure$Latin America$None$Peru$$All$GRI$false$none$active$1$$$$$$$$https://i.ytimg.com/vi/_2xDJphtn0w/maxresdefault.jpg$$;16$$Land Development - Brazil$RealEstate$Latin America$None$Brazil$$Land Development$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/463ed6b6-8a9b-4357-b22b-a200ee402599.jpg$$;17$$LatAM GRI RE$RealEstate$Latin America$None$Regional$$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/6fb893a0-6dd9-4724-a25f-9e3cb0e78ff8.jpg$$;18$$Magazine Infra$Infrastructure$Latin America$None$Brazil$$Infrastructure$GRI$false$none$inactive$1$$$$$$$$https://i.ytimg.com/vi/_2xDJphtn0w/maxresdefault.jpg$$;19$$Magazine Real Estate Brazil$RealEstate$Latin America$None$Brazil$$All$GRI$false$none$inactive$1$$$$$$$$https://i.ytimg.com/vi/_2xDJphtn0w/maxresdefault.jpg$$;20$$Mexico GRI$RealEstate$Latin America$None$Mexico$$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/82f232d3-aa17-44d8-8ca0-f971fec2a8c8.jpg$$;21$$Office - Brazil$RealEstate$Latin America$None$Brazil$$Offices$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/bfc6707f-85fa-45d9-98a6-ead84dd16a67.jpg$$;22$$Peru GRI$RealEstate$Latin America$None$Peru$$All$GRI$false$none$active$1$$$$$$$$https://i.ytimg.com/vi/_2xDJphtn0w/maxresdefault.jpg$$;23$$PPPs and Concessions in Municipalities Brazil$Infrastructure$Latin America$None$Brazil$$PPPs$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/fda9e238-3e62-49a9-a2bb-6c5a9e3c69d1.jpg$$;24$$Residencial - Brazil$RealEstate$Latin America$None$Brazil$$Residential$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/bc4fed3a-336f-4ce0-9312-2a9b95bec5a3.jpg$$;25$$Retail - Brazil$Retail$Latin America$None$Brazil$$All$GRI$false$none$inactive$1$$$$$$$$https://i.ytimg.com/vi/_2xDJphtn0w/maxresdefault.jpg$$;26$$Shopping - Brazil$RealEstate$Latin America$None$Brazil$$Shopping$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/c2336047-5668-4237-9be4-3ea77b7d7f84.jpg$$;27$$Asia GRI$RealEstate$Asia$None$Regional$$All$GRI$false$none$active$1$$$$$$$$https://i.ytimg.com/vi/_2xDJphtn0w/maxresdefault.jpg$$;28$$China GRI$RealEstate$Asia$None$Beijing$$All$GRI$false$none$active$1$$$$$$$$https://i.ytimg.com/vi/_2xDJphtn0w/maxresdefault.jpg$$;29$$India GRI$RealEstate$Asia$None$Mumbai$$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/4ce2fb03-7fe1-47f8-983b-cad823c96d7a.jpg$$;30$$Infra Club India$Infrastructure$Asia$None$Mumbai$$All$GRI$true$none$active$1$$$$$$$$https://i.ytimg.com/vi/_2xDJphtn0w/maxresdefault.jpg$$;31$$Infra India GRI$Infrastructure$Asia$None$Mumbai$$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/aeef3575-1792-4263-9111-f9d8a8d388ac.jpg$$;32$$RE Club India$RealEstate$Asia$None$Mumbai$$All$GRI$true$none$active$1$$$$$$$$https://i.ytimg.com/vi/_2xDJphtn0w/maxresdefault.jpg$$;33$$British GRI$RealEstate$Europe$None$Paris$$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/27d59c95-1cbf-409c-9924-d5544f1fdb59.jpg$$;34$$CEE GRI$RealEstate$Europe$None$Regional$$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/cc055277-9e75-488b-8e66-d25b90b85f75.jpg$$;35$$Chairman Retreat$RealEstate$Europe$None$Switzerland$$All$GRI$true$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/66093275-25e8-46d8-9d42-3523c0e4b394.jpg$$;36$$Deutsche GRI$RealEstate$Europe$None$Germany$$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/1b6cb4b0-5e73-4bdf-9ded-9b291eadde9d.jpg$$;37$$Deutsche Logistik GRI$RealEstate$Europe$None$Germany$$Logistics$GRI$false$none$active$1$$$$$$$$https://i.ytimg.com/vi/_2xDJphtn0w/maxresdefault.jpg$$;38$$Deustche Wohnen GRI$RealEstate$Europe$None$Germany$$Residential$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/f10acdf4-fbfa-49e3-bfa1-52a71a550f3e.jpg$$;39$$Espana GRI$RealEstate$Europe$None$Madrid$$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/de5fee3a-245c-4eaa-91d6-6460f5f0d754.jpg$$;40$$Europe GRI$RealEstate$Europe$None$Regional$$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/19266cd0-0d93-4419-b172-781cdc32630b.jpg$$;41$$France GRI$RealEstate$Europe$None$Paris$$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/d62cabf9-a9dc-4f68-9d38-502f42292782.jpg$$;42$$GRI Club Real Estate - Europe$RealEstate$Europe$None$Regional$$All$GRI$true$none$active$1$$$$$$$$https://i.ytimg.com/vi/_2xDJphtn0w/maxresdefault.jpg$$;43$$Italia GRI$RealEstate$Europe$None$Milan$$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/d6ca95f8-2214-4b3c-a686-7a5d15e46f93.jpg$$;44$$Residential Europe GRI$RealEstate$Europe$None$Regional$$All$GRI$false$none$active$1$$$$$$$$https://i.ytimg.com/vi/_2xDJphtn0w/maxresdefault.jpg$$;45$$Russia GRI$RealEstate$Europe$None$Moscow$$All$GRI$false$none$active$1$$$$$$$$https://i.ytimg.com/vi/_2xDJphtn0w/maxresdefault.jpg$$;46$$Infra Latin America$Infrastructure$Latin America$None$Regional$$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/010c6b94-095a-4c7b-a68c-6cf7871f5ed9.jpg$$
-            </div>
-            <div id="testInterests" style="display:none;"></div>
-            <div id="header" class="generic">
-            <div id="main-header" class="generic"></div>
-            </div>
+        SET @ContactInterestLatinAmerica = LookUp(@Aux_DE , 'Contact-Interest-Latam' , 'Contact-Email' ,@ContactEmail)
+        SET @ContactInterestEurope = LookUp(@Aux_DE , 'Contact-Interest-Europe' , 'Contact-Email' , @ContactEmail)
+        SET @ContactInterestAsia = LookUp(@Aux_DE , 'Contact-Interest-Asia' , 'Contact-Email' , @ContactEmail)
+        SET @AuxContact = true
+        /*SET @EmailOptOut = LookUp(@Aux_DE , 'Email_Opt_Out' , 'Contact-Email' , @ContactEmail)*/
+        /*SET @EmailOptOutTime = LookUp(@Aux_DE , 'Contact_Opt_Out_Time' , 'Contact-Email' , @ContactEmail)*/
 
 
-            <div id="pre-container" class="generic">
-            <div id="container" class="generic">
-                <table>
-                      <div class="posFixed" float="right">
-                    <form id="submitParams" name="myForm" action="https://pub.s7.exacttarget.com/xyux4cxcmgn" onsubmit="return readyInterests()" method="post">
-                        <input id="ContactEmail" name="ContactEmail" value="%%=v(@ContactEmail)=%%" style="display:none">
-                        <input id="ContactID" name="ContactID" value="%%=v(@ContactID)=%%" style="display:none">
-                        <input id="interestsAll" name="testall" value="testall" style="display:none">
-                        <input id="interestsLatam" name="testlatam" value="testlatam" style="display:none">
-                        <input id="interestsEurope" name="testeurope" value="testeurope" style="display:none">
-                        <input id="interestsAsia" name="testasia" value="testasia" style="display:none">
-                        <button id="submitParamsButton" class="button" type="submit">s u b m i t</button>
-                    </form>
-                      </div>
-                    <div>
-                    <table>
-                      <tr>
-                      <h3>Filters</h3>
-                      <td class="generic">
-                        <div id="searchBox">
-                        <input type="text" placeholder="search" onkeyup="searchBox(this.value)">
-                      </div>
-                      </td>
-                      <td class="generic">
-                      <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#testSectorFilterLocation">Sector</button>
-                        <div class="collapse" id="testSectorFilterLocation"></div>
-                        </td>
-                        <td class="generic">
-                        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#testRegionFilterLocation">Region</button>
-                          <div class="collapse" id="testRegionFilterLocation"></div>
-                          </td>
-                          <td class="generic">
-                          <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#testCountryFilterLocation">Country</button>
-                            <div class="collapse" id="testCountryFilterLocation"></div>
-                            </td>
-                            <td class="generic">
-                            <button type="button" class="btn btn-info " data-toggle="collapse" data-target="#testSegmentFilterLocation">Segment</button>
-                              <div class="collapse" id="testSegmentFilterLocation"></div>
-                              </td>
-                              <td class="generic">
-                              <button type="button" class="btn btn-info " data-toggle="collapse" data-target="#sortByLocation">Subscription</button>
-                                <div class="collapse" id="sortByLocation">
-                                  <button class="generic" onclick="sortBy('all')"> all </button><br>
-                                  <button class="generic" onclick="sortBy('subscribed')">subscribed</button><br>
-                                  <button class="generic" onclick="sortBy('notsubscribed')">not subscribed </button><br>
-                                </div>
-                                </td>
-                              </tr>
-                    </table>
+        ELSEIF @Check_Contact_Sync_DE_CountRows >= 1 THEN
 
+        /*CONTACT EXISTS IN SYNC CONTACT DE*/
 
+        SET @ContactInterestLatinAmerica = LookUp(@Contact_DE , 'Product_of_interest_South_America__c' , 'Email' ,@ContactEmail)
+        SET @ContactInterestEurope = LookUp(@Contact_DE , 'Product_of_interest_Europe__c' , 'Email' , @ContactEmail)
+        SET @ContactInterestAsia = LookUp(@Contact_DE , 'Product_of_interest_Asia__c' , 'Email' , @ContactEmail)
+        SET @EmailOptOut = LookUp(@Contact_DE , 'HasOptedOutOfEmail' , 'Email' , @ContactEmail)
+        SET @GDPRFullConsent = LookUp(@Contact_DE , 'Consent_Given_to_GDPR__c' , 'Email' , @ContactEmail)
+        SET @ContactID = LookUp(@Contact_DE , 'Id' , 'Email' , @ContactEmail)
 
-                    <table>
-                      <td class="generic">
-                    <div id="filtersNames" style="display:none;">
-                        <div id="activeSectorFiltersHere"></div>
-                        <div id="activeRegionFiltersHere"></div>
-                        <div id="activeCountryFiltersHere"></div>
-                        <div id="activeSegmentFiltersHere"></div>
-                    </div>
-                    <div class="generic"><span>Active Filters:</span><br>
-                        <a href="" onclick="validateFilters('all',0)">clear all</a>
-                      </td>
-                      <td>
-                        <span id="activeSectorButtonFiltersHere"></span>
-                        <span id="activeRegionButtonFiltersHere"></span>
-                        <span id="activeCountryButtonFiltersHere"></span>
-                        <span id="activeSegmentButtonFiltersHere"></span>
+        ELSEIF @Check_Contact_Lead_DE_CountRows >= 1 THEN
 
-                    </div>
-                  </td>
-                </table>
-            </div>
+        /*CONTACT EXISTS IN LEAD DE*/
 
-            <h3>Products:</h3>
-            <div id="debugPrints0" class="generic"></div>
-          </div>
+        SET @ContactInterestLatinAmerica = LookUp(@Lead_DE , 'Product_of_Interest_Latin_America__c' , 'Email' ,@ContactEmail)
+        SET @ContactInterestEurope = LookUp(@Lead_DE , 'Product_of_Interest_Europe__c' , 'Email' , @ContactEmail)
+        SET @ContactInterestAsia = LookUp(@Lead_DE , 'Product_of_Interest_Asia__c' , 'Email' , @ContactEmail)
+        SET @EmailOptOut = LookUp(@Lead_DE , 'HasOptedOutOfEmail' , 'Email' , @ContactEmail)
+
+        ELSE
+        SET @NewContact = "true"
+        /*Output(concat('New Contact'))*/
+        ENDIF
+      </div>
+      <div id="allProductsToCSV">
+        /*---------------------------ALL PRODUCTS-------------------------*/
+        VAR @allProductsIndex,@allProductsCSV
+        SET @allProductRows = LookupRows( @Products_DE , "Product_Default" , "1" )
+        SET @allRowsCount = RowCount(@allProductRows)
+        IF NOT EMPTY(@allRowsCount) THEN
+        FOR @allProductsIndex = 1 to @allRowsCount DO
+        SET @allProductsCurrentRow = Row(@allProductRows,@allProductsIndex)
+        SET @currentProductName = Field(@allProductsCurrentRow, "Product_Name")
+        IF @allProductsIndex == 1 THEN
+        SET @allProductsCSV = concat(@allProductsCSV,@currentProductName)
+        ELSE
+        SET @allProductsCSV = concat(@allProductsCSV,';',@currentProductName)
+        ENDIF
+        NEXT @allProductsIndex
+        ENDIF
+      </div>/*@allProductsCSV*/
+      <div id="allProductsFieldsCSV">
+        /*---------------------------ALL PRODUCTS-------------------------*/
+        VAR @allProductsFieldsIndex,@allProductsFieldsCSV
+        SET @allProductsFieldsRows = LookupRows( @Products_DE , "Product_Default" , "1" )
+        SET @allProductsFieldsRowsCount = RowCount(@allProductsFieldsRows)
+        IF NOT EMPTY(@allProductsFieldsRowsCount) THEN
+        FOR @allProductsFieldsIndex = 1 to @allProductsFieldsRowsCount DO
+        SET @allProductsFieldsCurrentRow = Row(@allProductsFieldsRows,@allProductsFieldsIndex)
+        SET @currentProductId = Field(@allProductsFieldsCurrentRow, "Product_ID")
+        IF @allProductsFieldsIndex == 1 THEN
+        SET @allProductsFieldsCSV = concat(@allProductsFieldsCSV,@currentProductId)
+        ELSE
+        SET @allProductsFieldsCSV = concat(@allProductsFieldsCSV,';',@currentProductId)
+        ENDIF
+        SET @currentProductSFID = Field(@allProductsFieldsCurrentRow, "Product_SF_ID")
+        SET @currentProductName = Field(@allProductsFieldsCurrentRow, "Product_Name")
+        SET @currentProductSector = Field(@allProductsFieldsCurrentRow, "Product_Sector")
+        SET @currentProductRegion1 = Field(@allProductsFieldsCurrentRow, "Product_Region_1")
+        SET @currentProductRegion2 = Field(@allProductsFieldsCurrentRow, "Product_Region_2")
+        SET @currentProductCountry1 = Field(@allProductsFieldsCurrentRow, "Product_Country_1")
+        SET @currentProductCountry2 = Field(@allProductsFieldsCurrentRow, "Product_Country_2")
+        SET @currentProductSpeciality = Field(@allProductsFieldsCurrentRow, "Product_Speciality")
+        SET @currentProductCompany = Field(@allProductsFieldsCurrentRow, "Product_Company")
+        SET @currentProductClub = Field(@allProductsFieldsCurrentRow, "Product_Club")
+        SET @currentProductClubName = Field(@allProductsFieldsCurrentRow, "Product_Club_Name")
+        SET @currentProductStatus = Field(@allProductsFieldsCurrentRow, "Product_Status")
+        SET @currentProductDefault = Field(@allProductsFieldsCurrentRow, "Product_Default")
+        SET @currentProductPhone = Field(@allProductsFieldsCurrentRow, "Product_Phone")
+        SET @currentProductEmail = Field(@allProductsFieldsCurrentRow, "Product_Email")
+        SET @currentProductAddress = Field(@allProductsFieldsCurrentRow, "Product_Address")
+        SET @currentProductResponsible1 = Field(@allProductsFieldsCurrentRow, "Product_Responsible_1")
+        SET @currentProductResponsible2 = Field(@allProductsFieldsCurrentRow, "Product_Responsible_2")
+        SET @currentProductURL_1 = Field(@allProductsFieldsCurrentRow, "Product_URL_1")
+        SET @currentProductURL_2 = Field(@allProductsFieldsCurrentRow, "Product_URL_2")
+        SET @currentProductIMGSource1 = Field(@allProductsFieldsCurrentRow, "Product_IMG_Source_1")
+        SET @currentProductIMGSource2 = Field(@allProductsFieldsCurrentRow, "Product_IMG_Source_2")
+        SET @allProductsFieldsCSV = concat(
+        @allProductsFieldsCSV,'$',
+        @currentProductSFID,'$',
+        @currentProductName,'$',
+        @currentProductSector,'$',
+        @currentProductRegion1,'$',
+        @currentProductRegion2,'$',
+        @currentProductCountry1,'$',
+        @currentProductCountry2,'$',
+        @currentProductSpeciality,'$',
+        @currentProductCompany,'$',
+        @currentProductClub,'$',
+        @currentProductClubName,'$',
+        @currentProductStatus,'$',
+        @currentProductDefault,'$',
+        @currentProductPhone,'$',
+        @currentProductEmail,'$',
+        @currentProductAddress,'$',
+        @currentProductResponsible1,'$',
+        @currentProductResponsible2,'$',
+        @currentProductURL_1,'$',
+        @currentProductURL_2,'$',
+        @currentProductIMGSource1,'$',
+        @currentProductIMGSource2,'$'
+        )
+        NEXT @allProductsFieldsIndex
+        ENDIF
+      </div>
+      <div>
+        VAR @allInterests
+
+        IF NOT EMPTY (@allInterests) THEN
+        IF NOT EMPTY (@ContactInterestLatinAmerica) THEN
+        SET @allInterests = concat(@allInterests,';',@ContactInterestLatinAmerica)
+        ENDIF
+        ELSE
+        SET @allInterests = @ContactInterestLatinAmerica
+        ENDIF
+        IF NOT EMPTY (@allInterests) THEN
+        IF NOT EMPTY (@ContactInterestEurope) THEN
+        SET @allInterests = concat(@allInterests,';',@ContactInterestEurope)
+        ENDIF
+        ELSE
+        SET @allInterests = @ContactInterestEurope
+        ENDIF
+        IF NOT EMPTY (@allInterests) THEN
+        IF NOT EMPTY (@ContactInterestAsia) THEN
+        SET @allInterests = concat(@allInterests,';',@ContactInterestAsia)
+        ENDIF
+        ELSE
+        SET @allInterests = @ContactInterestAsia
+        ENDIF
+
+        /*NEXT @All_Products_Index*/
+      </div>/*@All_Products_CSV*/
+      ]%%
+    </div>
+    <div id="allDEFields" style="display:none;">
+      1$$Argentina GRI$RealEstate$Latin America$None$Argentina$$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/529feaf5-e566-4ae6-b5db-6e3a3686626a.jpg$$;2$$Brazil GRI$RealEstate$Latin America$None$Brazil$$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/a79a3c56-7dd9-4a2a-b521-073156acf205.jpg$$;3$$Chile GRI$RealEstate$Latin America$None$Chile$$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/67dbd8a8-8f05-43bc-adbb-87cc8d2d63dc.jpg$$;4$$China LATAM Infrastructure Summit$Infrastructure$Asia$Latin America$Beijing$Brazil$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/5616a495-ced0-4fcb-b471-5a8c16d55e45.jpg$$;5$$Colombia GRI$RealEstate$Latin America$None$Colombia$$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/ee99a9c8-fab2-4ab1-b36e-22f895bce8b0.jpg$$;6$$Club Real Estate - Brazil$RealEstate$Latin America$None$Brazil$$All$GRI$true$none$inactive$1$$$$$$$$https://i.ytimg.com/vi/_2xDJphtn0w/maxresdefault.jpg$$;7$$Club Retail - Brazil$Retail$Latin America$None$Brazil$$All$GRI$true$none$inactive$1$$$$$$$$https://i.ytimg.com/vi/_2xDJphtn0w/maxresdefault.jpg$$;8$$Healthcare - Brazil$RealEstate$Latin America$None$Brazil$$Healthcare$GRI$false$none$inactive$1$$$$$$$$https://i.ytimg.com/vi/_2xDJphtn0w/maxresdefault.jpg$$;9$$Hotels - Brazil$RealEstate$Latin America$None$Brazil$$Hotels$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/82465b28-b79b-47a9-8619-536c81535cc0.jpg$$;10$$Industrial and Logistics - Brazil$RealEstate$Latin America$None$Brazil$$Logistics$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/3641fa3f-90d8-431f-b89e-92e42e9b48b5.jpg$$;11$$Infra Brazil GRI$Infrastructure$Latin America$None$Brazil$$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/f854ab90-bb19-491a-831c-34db6e4d10ef.jpg$$;12$$Infra Club Latam$Infrastructure$Latin America$None$Regional$$All$GRI$true$none$active$1$$$$$$$$https://i.ytimg.com/vi/_2xDJphtn0w/maxresdefault.jpg$$;13$$Infra Colombia$Infrastructure$Latin America$None$Colombia$$All$GRI$false$none$active$1$$$$$$$$https://i.ytimg.com/vi/_2xDJphtn0w/maxresdefault.jpg$$;14$$Infra Mexico GRI$Infrastructure$Latin America$None$Mexico$$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/c92206bd-192b-4c49-ac53-fd84cf7a6ebc.jpg$$;15$$Infra Peru GRI$Infrastructure$Latin America$None$Peru$$All$GRI$false$none$active$1$$$$$$$$https://i.ytimg.com/vi/_2xDJphtn0w/maxresdefault.jpg$$;16$$Land Development - Brazil$RealEstate$Latin America$None$Brazil$$Land Development$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/463ed6b6-8a9b-4357-b22b-a200ee402599.jpg$$;17$$LatAM GRI RE$RealEstate$Latin America$None$Regional$$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/6fb893a0-6dd9-4724-a25f-9e3cb0e78ff8.jpg$$;18$$Magazine Infra$Infrastructure$Latin America$None$Brazil$$Infrastructure$GRI$false$none$inactive$1$$$$$$$$https://i.ytimg.com/vi/_2xDJphtn0w/maxresdefault.jpg$$;19$$Magazine Real Estate Brazil$RealEstate$Latin America$None$Brazil$$All$GRI$false$none$inactive$1$$$$$$$$https://i.ytimg.com/vi/_2xDJphtn0w/maxresdefault.jpg$$;20$$Mexico GRI$RealEstate$Latin America$None$Mexico$$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/82f232d3-aa17-44d8-8ca0-f971fec2a8c8.jpg$$;21$$Office - Brazil$RealEstate$Latin America$None$Brazil$$Offices$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/bfc6707f-85fa-45d9-98a6-ead84dd16a67.jpg$$;22$$Peru GRI$RealEstate$Latin America$None$Peru$$All$GRI$false$none$active$1$$$$$$$$https://i.ytimg.com/vi/_2xDJphtn0w/maxresdefault.jpg$$;23$$PPPs and Concessions in Municipalities Brazil$Infrastructure$Latin America$None$Brazil$$PPPs$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/fda9e238-3e62-49a9-a2bb-6c5a9e3c69d1.jpg$$;24$$Residencial - Brazil$RealEstate$Latin America$None$Brazil$$Residential$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/bc4fed3a-336f-4ce0-9312-2a9b95bec5a3.jpg$$;25$$Retail - Brazil$Retail$Latin America$None$Brazil$$All$GRI$false$none$inactive$1$$$$$$$$https://i.ytimg.com/vi/_2xDJphtn0w/maxresdefault.jpg$$;26$$Shopping - Brazil$RealEstate$Latin America$None$Brazil$$Shopping$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/c2336047-5668-4237-9be4-3ea77b7d7f84.jpg$$;27$$Asia GRI$RealEstate$Asia$None$Regional$$All$GRI$false$none$active$1$$$$$$$$https://i.ytimg.com/vi/_2xDJphtn0w/maxresdefault.jpg$$;28$$China GRI$RealEstate$Asia$None$Beijing$$All$GRI$false$none$active$1$$$$$$$$https://i.ytimg.com/vi/_2xDJphtn0w/maxresdefault.jpg$$;29$$India GRI$RealEstate$Asia$None$Mumbai$$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/4ce2fb03-7fe1-47f8-983b-cad823c96d7a.jpg$$;30$$Infra Club India$Infrastructure$Asia$None$Mumbai$$All$GRI$true$none$active$1$$$$$$$$https://i.ytimg.com/vi/_2xDJphtn0w/maxresdefault.jpg$$;31$$Infra India GRI$Infrastructure$Asia$None$Mumbai$$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/aeef3575-1792-4263-9111-f9d8a8d388ac.jpg$$;32$$RE Club India$RealEstate$Asia$None$Mumbai$$All$GRI$true$none$active$1$$$$$$$$https://i.ytimg.com/vi/_2xDJphtn0w/maxresdefault.jpg$$;33$$British GRI$RealEstate$Europe$None$Paris$$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/27d59c95-1cbf-409c-9924-d5544f1fdb59.jpg$$;34$$CEE GRI$RealEstate$Europe$None$Regional$$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/cc055277-9e75-488b-8e66-d25b90b85f75.jpg$$;35$$Chairman Retreat$RealEstate$Europe$None$Switzerland$$All$GRI$true$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/66093275-25e8-46d8-9d42-3523c0e4b394.jpg$$;36$$Deutsche GRI$RealEstate$Europe$None$Germany$$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/1b6cb4b0-5e73-4bdf-9ded-9b291eadde9d.jpg$$;37$$Deutsche Logistik GRI$RealEstate$Europe$None$Germany$$Logistics$GRI$false$none$active$1$$$$$$$$https://i.ytimg.com/vi/_2xDJphtn0w/maxresdefault.jpg$$;38$$Deustche Wohnen GRI$RealEstate$Europe$None$Germany$$Residential$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/f10acdf4-fbfa-49e3-bfa1-52a71a550f3e.jpg$$;39$$Espana GRI$RealEstate$Europe$None$Madrid$$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/de5fee3a-245c-4eaa-91d6-6460f5f0d754.jpg$$;40$$Europe GRI$RealEstate$Europe$None$Regional$$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/19266cd0-0d93-4419-b172-781cdc32630b.jpg$$;41$$France GRI$RealEstate$Europe$None$Paris$$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/d62cabf9-a9dc-4f68-9d38-502f42292782.jpg$$;42$$GRI Club Real Estate - Europe$RealEstate$Europe$None$Regional$$All$GRI$true$none$active$1$$$$$$$$https://i.ytimg.com/vi/_2xDJphtn0w/maxresdefault.jpg$$;43$$Italia GRI$RealEstate$Europe$None$Milan$$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/d6ca95f8-2214-4b3c-a686-7a5d15e46f93.jpg$$;44$$Residential Europe GRI$RealEstate$Europe$None$Regional$$All$GRI$false$none$active$1$$$$$$$$https://i.ytimg.com/vi/_2xDJphtn0w/maxresdefault.jpg$$;45$$Russia GRI$RealEstate$Europe$None$Moscow$$All$GRI$false$none$active$1$$$$$$$$https://i.ytimg.com/vi/_2xDJphtn0w/maxresdefault.jpg$$;46$$Infra Latin America$Infrastructure$Latin America$None$Regional$$All$GRI$false$none$active$1$$$$$$$$http://image.griglobalclub.org/lib/fe901372726c047d72/m/8/010c6b94-095a-4c7b-a68c-6cf7871f5ed9.jpg$$
+    </div>
+    <div id="testInterests" style="display:none;">%%=v(@allInterests)=%%</div>
+    <div id="header" class="generic">
+      <div id="main-header" class="generic"></div>
+    </div>
+    <table>
+      <div class="posFixed" float="right">
+        <form id="submitParams" name="myForm" action="https://pub.s7.exacttarget.com/xyux4cxcmgn" onsubmit="return readyInterests(preferenceCenterObject)" method="post">
+          <input id="ContactEmail" name="ContactEmail" value="%%=v(@ContactEmail)=%%" style="display:none">
+          <input id="ContactID" name="ContactID" value="%%=v(@ContactID)=%%" style="display:none">
+          <input id="interestsAll" name="testall" value="testall" style="display:none">
+          <input id="interestsLatam" name="testlatam" value="testlatam" style="display:none">
+          <input id="interestsEurope" name="testeurope" value="testeurope" style="display:none">
+          <input id="interestsAsia" name="testasia" value="testasia" style="display:none">
+          <button id="submitParamsButton" class="button" type="submit">s u b m i t</button>
+        </form>
+      </div>
+      <div>
+        <table>
+          <tr>
+            <h3>Filters</h3>
+            <td class="generic">
+              <div id="searchBox">
+                <input type="text" placeholder="search" onkeyup="searchBox(this.value)">
+              </div>
+            </td>
+            <td class="generic">
+              <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#testSectorFilterLocation">Sector</button>
+              <div class="collapse" id="testSectorFilterLocation"></div>
+            </td>
+            <td class="generic">
+              <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#testRegionFilterLocation">Region</button>
+              <div class="collapse" id="testRegionFilterLocation"></div>
+            </td>
+            <td class="generic">
+              <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#testCountryFilterLocation">Country</button>
+              <div class="collapse" id="testCountryFilterLocation"></div>
+            </td>
+            <td class="generic">
+              <button type="button" class="btn btn-info " data-toggle="collapse" data-target="#testSegmentFilterLocation">Segment</button>
+              <div class="collapse" id="testSegmentFilterLocation"></div>
+            </td>
+            <td class="generic">
+              <button type="button" class="btn btn-info " data-toggle="collapse" data-target="#sortByLocation">Subscription</button>
+              <div class="collapse" id="sortByLocation">
+                <button class="subscribtionButtons" onclick="sortBy('all')"> all </button><br>
+                <button class="subscribtionButtons" onclick="sortBy('subscribed')">subscribed</button><br>
+                <button class="subscribtionButtons" onclick="sortBy('notsubscribed')">not subscribed </button><br>
+              </div>
+            </td>
+          </tr>
+        </table>
+        <div id="filtersNames" style="display:none;">
+          <div id="activeSectorFiltersHere"></div>
+          <div id="activeRegionFiltersHere"></div>
+          <div id="activeCountryFiltersHere"></div>
+          <div id="activeSegmentFiltersHere"></div>
         </div>
+        <div class="generic"><span>Active Filters:</span><br>
+          <a href="" onclick="validateFilters('all',0)">clear all</a>
+          <span id="activeSectorButtonFiltersHere"></span>
+          <span id="activeRegionButtonFiltersHere"></span>
+          <span id="activeCountryButtonFiltersHere"></span>
+          <span id="activeSegmentButtonFiltersHere"></span>
+        </div>
+      </div>
+    </table>
+    <h3>Products:</h3>
+    <div id="debugPrints0" class="generic"></div>
     <script id="functionCalls">
-          let preferenceCenterObject = initObj();
-          init(preferenceCenterObject);
+    let preferenceCenterObject = initObj();
+    init(preferenceCenterObject);
     </script>
-</body>
+  </body>
 
-</html>
+  </html>
