@@ -1,12 +1,24 @@
 /* GENERIC JAVASCRIPT FUNCTIONS LIBRARY */
 
-/* VERSION 0.0.18 | DATE 14-10-2018 */
+/* VERSION 0.0.20 | DATE 17-10-2018 */
 
 const csvToArray = (csvEntry, csvDelimiter = ",") => csvEntry.split(csvDelimiter);
 
 const arrayNoDups = (mySet = []) => Array.from(new Set(mySet));
 
 const changeParsers = (myArray = [], delim = ";") => myArray.toString().replace(/,/g, ";");
+
+function doubleCSVtoMatrix(csvInputId, delim1, delim2) {
+    let array1 = csvToArray(document.getElementById(csvInputId).innerHTML, delim1);
+    let matrix = [];
+    for (let i = array1.length; i--;matrix[i] = csvToArray(array1[i], delim2)){}
+    return matrix;
+}
+function returnFieldifMatch(matrix, wantedField, conditionField, conditionValue) {
+    let matchedArray = [];
+    for (let i = matrix.length; i--;)(matrix[i][conditionField] === conditionValue) ? matchedArray.push(matrix[i][wantedField]) : false
+    return matchedArray;
+}
 
 function removeFromArray(myArray, element) {
     for (let i = myArray.length; i--;)(myArray[i] === element) ? myArray.splice(i, 1) : false
